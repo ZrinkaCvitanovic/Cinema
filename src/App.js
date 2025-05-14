@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Dvorana from "./components/Dvorana";
+import Film from "./components/Film";
+import Administrator from "./components/Administrator";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    ReactDOM.createRoot(document.getElementById("root")).render(
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/filmovi" element={<Film />} />
+                    <Route path="/dvorane" element={<Dvorana />} />
+                    <Route path="/administratori" element={<Administrator />} />
+                </Routes>
+            </BrowserRouter>
+        </>
+    );
 }
-
 export default App;

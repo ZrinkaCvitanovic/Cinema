@@ -6,17 +6,16 @@ import Film from "./components/Film";
 import Administrator from "./components/Administrator";
 
 function App() {
-    ReactDOM.createRoot(document.getElementById("root")).render(
-        <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/filmovi" element={<Film />} />
-                    <Route path="/dvorane" element={<Dvorana />} />
-                    <Route path="/administratori" element={<Administrator />} />
-                </Routes>
-            </BrowserRouter>
-        </>
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/filmovi" element={<Film />} />
+                <Route path="/dvorane" element={<Dvorana />} />
+                <Route path="/administratori" element={<Administrator />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 export default App;

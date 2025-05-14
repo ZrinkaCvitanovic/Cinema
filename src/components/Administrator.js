@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-function Administrator() {
+function Administratori() {
     return (
         <div className="App">
             <Navbar />
@@ -8,4 +8,4 @@ function Administrator() {
     );
 }
 
-export default Administrator;
+export default Administratori;

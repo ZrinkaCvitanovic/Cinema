@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Navbar from "./Navbar";
+import JedanFilm from "./JedanFilm";
 
 function Film() {
     const [filmovi, setFilmovi] = useState([]);
@@ -9,6 +11,8 @@ function Film() {
     const [trajanje, setTrajanje] = useState(0);
     const [dob, setDob] = useState(0);
     const [cijena, setCijena] = useState(0.0);
+    const [details, setDetails] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://localhost:8080/api/film/all")
@@ -22,12 +26,8 @@ function Film() {
             });
     }, []);
 
-    const editFilm = async (id) => {
-        const response = await fetch(`http://localhost:8080/api/film/${id}`);
-        console.log(response);
-        const data = await response.json;
-        console.log(data);
-        setFilmovi(data);
+    const fetchOneFilm = async (id) => {
+        navigate(`/filmovi/${id}`);
     };
 
     const deleteFilm = async (id) => {
@@ -40,9 +40,9 @@ function Film() {
         return;
     };
 
-    // Post with fetchAPI
     const addFilmovi = async () => {
         let response = await fetch(`http://localhost:8080/api/film/`, {
+            mode: "no-cors",
             method: "POST",
             body: JSON.stringify({
                 naziv: naziv,
@@ -54,7 +54,8 @@ function Film() {
                 "Content-type": "application/json; charset=UTF-8",
             },
         });
-        let data = await response.json();
+        await response.json();
+        let data = response.body;
         setFilmovi((filmovi) => [data, ...filmovi]);
         setNaziv("");
         setZaposl("");
@@ -78,10 +79,7 @@ function Film() {
                         <tr>
                             <th>ID</th>
                             <th>Naziv</th>
-                            <th>Trajanje (min)</th>
-                            <th>Cijena ulaznice (€)</th>
-                            <th>Dobna granica</th>
-                            <th>Unio</th>
+                            <th>Detalji</th>
                             <th>Izmjene</th>
                         </tr>
                     </thead>
@@ -91,10 +89,9 @@ function Film() {
                                 <tr key={film.id}>
                                     <td className="film-title">{film.id}</td>
                                     <td className="film-title">{film.naziv}</td>
-                                    <td className="film-body">{film.trajanjeMin}</td>
-                                    <td>{film.ulazEur}</td>
-                                    <td>{film.dobnaGranica}</td>
-                                    <td>{film.unioZaposlenik}</td>
+                                    <td>
+                                        <button onClick={() => fetchOneFilm(film.id)}> Detalji o filmu </button>
+                                    </td>
                                     <td className="button">
                                         <button className="delete-btn" onClick={() => deleteFilm(film.id)}>
                                             Delete

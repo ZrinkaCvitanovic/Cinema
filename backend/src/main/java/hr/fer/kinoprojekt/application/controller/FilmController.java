@@ -9,9 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "*")
+
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/film")
 public class FilmController {
 
@@ -30,7 +31,7 @@ public class FilmController {
         return ResponseEntity.ok(FilmDto.fromDomain(film));
     }
 
-    @PostMapping(value = "", consumes = {"application/json"})
+    @PostMapping("/")
     public ResponseEntity<String> save(@RequestBody SpremiFilmDto dto) {
         try {
             service.save(dto.toDomain(), dto.getUnioZaposlenik());

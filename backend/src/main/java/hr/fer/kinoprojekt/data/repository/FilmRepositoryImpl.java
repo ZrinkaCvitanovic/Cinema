@@ -21,7 +21,7 @@ public class FilmRepositoryImpl implements FilmRepository {
     }
 
     @Override
-    public Film getFilm(String id) {
+    public Film getFilm(Integer id) {
         return repository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
@@ -31,10 +31,10 @@ public class FilmRepositoryImpl implements FilmRepository {
     }
 
     @Override
-    public void deletePoId(String id) {
+    public void deletePoId(Integer id) {
         repository.deleteById(id);
     }
 }
 
 @Repository
-interface JpaFilmRepository extends JpaRepository<Film, String> {}
+interface JpaFilmRepository extends JpaRepository<Film, Integer> {}

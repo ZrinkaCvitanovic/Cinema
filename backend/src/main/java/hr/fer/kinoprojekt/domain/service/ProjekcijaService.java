@@ -27,7 +27,7 @@ public class ProjekcijaService {
         return projekcijaRepository.getProjekcija(id);
     }
 
-    public void save(Projekcija projekcija, String imeDvorana, String imeZaposlenik, String idFilm) {
+    public void save(Projekcija projekcija, String imeDvorana, String imeZaposlenik, Integer idFilm) {
         projekcija.setDvorana(dvoranaRepository.getDvorana(imeDvorana));
         projekcija.setUnioZaposlenik(zaposlenikRepository.getPoKorisnickomImenu(imeZaposlenik));
         projekcija.setFilm(filmRepository.getFilm(idFilm));

@@ -26,12 +26,12 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FilmDto> getFilmById(@PathVariable String id) {
+    public ResponseEntity<FilmDto> getFilmById(@PathVariable Integer id) {
         final Film film = service.getFilm(id);
         return ResponseEntity.ok(FilmDto.fromDomain(film));
     }
 
-    @PostMapping("/")
+    @PostMapping(consumes = {"*/*"})
     public ResponseEntity<String> save(@RequestBody SpremiFilmDto dto) {
         try {
             service.save(dto.toDomain(), dto.getUnioZaposlenik());
@@ -43,7 +43,7 @@ public class FilmController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteFilmById(@PathVariable String id) {
+    public ResponseEntity<String> deleteFilmById(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.ok("SUCCESS!");
     }

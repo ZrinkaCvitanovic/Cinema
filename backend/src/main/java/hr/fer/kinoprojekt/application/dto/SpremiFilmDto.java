@@ -17,7 +17,6 @@ public class SpremiFilmDto {
                 .trajanjeMin(trajanjeMin)
                 .dobnaGranica(dobnaGranica)
                 .ulazEur(ulazEur)
-                /*.unioZaposlenik(unioZaposlenik) ??*/
                 .build();
     }
 }

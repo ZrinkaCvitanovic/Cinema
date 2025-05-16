@@ -20,7 +20,7 @@ public class FilmService {
         return filmRepository.getFilmovi();
     }
 
-    public Film getFilm(String id) {
+    public Film getFilm(Integer id) {
         return filmRepository.getFilm(id);
     }
 
@@ -30,7 +30,7 @@ public class FilmService {
         filmRepository.save(film);
     }
 
-    public void delete(String id) {
+    public void delete(Integer id) {
         filmRepository.deletePoId(id);
     }
 }

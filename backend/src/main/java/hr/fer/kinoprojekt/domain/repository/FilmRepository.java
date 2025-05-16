@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FilmRepository {
     List<Film> getFilmovi();
-    Film getFilm(String id);
+    Film getFilm(Integer id);
     void save(Film film);
-    void deletePoId(String id);
+    void deletePoId(Integer id);
 }

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "./Navbar";
-import JedanFilm from "./JedanFilm";
 
 function Film() {
     const [filmovi, setFilmovi] = useState([]);
@@ -11,7 +10,6 @@ function Film() {
     const [trajanje, setTrajanje] = useState(0);
     const [dob, setDob] = useState(0);
     const [cijena, setCijena] = useState(0.0);
-    const [details, setDetails] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,7 +17,6 @@ function Film() {
             .then((response) => response.json())
             .then((data) => {
                 setFilmovi(data);
-                //console.log(data);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -40,39 +37,43 @@ function Film() {
         return;
     };
 
-    const addFilmovi = async () => {
-        let response = await fetch(`http://localhost:8080/api/film/`, {
-            mode: "no-cors",
-            method: "POST",
-            body: JSON.stringify({
-                naziv: naziv,
-                trajanjeMin: trajanje,
-                ulazEur: cijena,
-                dobnaGranica: dob,
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-            },
-        });
-        await response.json();
-        let data = response.body;
-        setFilmovi((filmovi) => [data, ...filmovi]);
-        setNaziv("");
-        setZaposl("");
-        setCijena(0.0);
-        setDob(0);
-        setTrajanje(0);
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        addFilmovi();
+
+        const payload = {
+            naziv: naziv,
+            trajanjeMin: parseInt(trajanje),
+            ulazEur: parseFloat(cijena),
+            dobnaGranica: parseInt(dob),
+            unioZaposlenik: zaposl,
+        };
+
+        try {
+            const response = await fetch("http://localhost:8080/api/film", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+            if (!response.ok) {
+                throw new Error("Greška pri slanju podataka");
+            } else {
+                fetch("http://localhost:8080/api/film/all")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setFilmovi(data);
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+            }
+        } catch (err) {
+            throw new Error("Greška pri slanju podataka22");
+        }
     };
 
     return (
         <div className="App">
             <Navbar />
-            <p>Filmovi page</p>
             <div>
                 <table>
                     <thead>

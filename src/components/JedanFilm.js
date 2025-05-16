@@ -19,7 +19,7 @@ function JedanFilm() {
             .catch((err) => {
                 console.log(err.message);
             });
-    }, []);
+    }, [id]);
 
     const returnToFilmovi = async () => {
         navigate("/filmovi");
@@ -28,7 +28,7 @@ function JedanFilm() {
     return (
         <div className="App">
             <Navbar />
-            <p>Detalji o filmu</p>
+            <h2>Detalji o filmu</h2>
             <div>
                 <table>
                     <thead>
@@ -39,7 +39,6 @@ function JedanFilm() {
                             <th>Cijena ulaznice (€)</th>
                             <th>Dobna granica</th>
                             <th>Unio</th>
-                            <th>Izmjene</th>
                         </tr>
                     </thead>
                     <tbody>

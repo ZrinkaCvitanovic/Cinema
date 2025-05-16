@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class FilmDto {
-    private String id;
+    private Integer id;
     private String naziv;
     private Integer trajanjeMin;
     private Integer dobnaGranica;

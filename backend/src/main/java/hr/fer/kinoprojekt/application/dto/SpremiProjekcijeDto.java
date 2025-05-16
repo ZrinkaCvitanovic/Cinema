@@ -9,6 +9,7 @@ import java.time.LocalTime;
 @Data
 
 public class SpremiProjekcijeDto {
+    private String id;
     private String imeDvorana;
     private String unioProjekcija;
     private Integer idFilm;
@@ -19,6 +20,7 @@ public class SpremiProjekcijeDto {
 
     public Projekcija toDomain() {
         return Projekcija.builder()
+                .id(id)
                 .trajanjeMin(this.trajanjeMin)
                 .vrijemePoc(LocalTime.parse(this.vrijemePoc))
                 .datum(LocalDate.parse(this.datum))

@@ -106,11 +106,11 @@ function Film() {
             </div>
             <div className="add-post-container">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" size="70" value={naziv} placeholder="Naziv filma" onChange={(e) => setNaziv(e.target.value)} />
-                    <input type="number" value={trajanje} name="" placeholder="Trajanje u minutama" onChange={(e) => setTrajanje(e.target.value)}></input>
-                    <input type="number" value={cijena} min="0" max="20" step="0.01" placeholder="xx.xx" onChange={(e) => setCijena(e.target.value)}></input>
-                    <input type="number" value={dob} name="" onChange={(e) => setDob(e.target.value)}></input>
-                    <input type="text" value={zaposl} name="" placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></input>
+                    <input type="text" required size="70" value={naziv} placeholder="Naziv filma" onChange={(e) => setNaziv(e.target.value)} />
+                    <input type="number" required placeholder="Trajanje u minutama" onChange={(e) => setTrajanje(e.target.value)}></input>
+                    <input type="number" required min="0" max="20" step="0.01" placeholder="xx.xx" onChange={(e) => setCijena(e.target.value)}></input>
+                    <input type="number" required placeholder="Dobno ogrančenje" onChange={(e) => setDob(e.target.value)}></input>
+                    <input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></input>
                     <button type="submit">Dodaj film</button>
                 </form>
             </div>

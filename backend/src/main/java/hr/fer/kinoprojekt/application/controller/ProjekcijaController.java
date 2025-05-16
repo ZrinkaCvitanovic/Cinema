@@ -9,10 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
-@RequestMapping("/api/projekcija")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/projekcija")
 public class ProjekcijaController {
     private ProjekcijaService projekcijaService;
 

@@ -11,8 +11,8 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/dvorana")
-@CrossOrigin(origins = {"http://localhost:3000"})
 public class DvoranaController {
 
     private DvoranaService service;

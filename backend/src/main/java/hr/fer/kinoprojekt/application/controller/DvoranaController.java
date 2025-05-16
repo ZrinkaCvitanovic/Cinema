@@ -33,4 +33,21 @@ public class DvoranaController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping(consumes = {"*/*"})
+    public ResponseEntity<String> save(@RequestBody DvoranaDto dto) {
+        try {
+            service.save(dto.toDomain(), dto.getUnioZaposlenik());
+            return ResponseEntity.ok("SUCCESS!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @DeleteMapping("/{ime}")
+    public ResponseEntity<String> deleteDvoranaByIme(@PathVariable String ime) {
+        service.delete(ime);
+        return ResponseEntity.ok("SUCCESS!");
+    }
 }

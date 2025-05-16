@@ -1,6 +1,7 @@
 package hr.fer.kinoprojekt.application.dto;
 
 import hr.fer.kinoprojekt.domain.model.Dvorana;
+import hr.fer.kinoprojekt.domain.model.Film;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,6 +19,14 @@ public class DvoranaDto {
                 .kapacitet(dvorana.getKapacitet())
                 .otvorena(dvorana.isOtvorena())
                 .unioZaposlenik(dvorana.getZaposlenik().getKorisnickoIme())
+                .build();
+    }
+
+    public Dvorana toDomain() {
+        return Dvorana.builder()
+                .ime(ime)
+                .kapacitet(kapacitet)
+                .otvorena(otvorena)
                 .build();
     }
 }

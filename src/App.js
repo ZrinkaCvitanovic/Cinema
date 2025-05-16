@@ -6,6 +6,8 @@ import Film from "./components/Film";
 import Administrator from "./components/Administrator";
 import JedanFilm from "./components/JedanFilm";
 import UrediFilm from "./components/UrediFilm";
+import JednaDvorana from "./components/JednaDvorana";
+import UrediDvoranu from "./components/UrediDvoranu";
 
 function App() {
     const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -17,6 +19,8 @@ function App() {
                 <Route path="/filmovi/:id" element={<JedanFilm />} />
                 <Route path="/filmovi/edit/:id" element={<UrediFilm />} />
                 <Route path="/dvorane" element={<Dvorana />} />
+                <Route path="/dvorane/:ime" element={<JednaDvorana />} />
+                <Route path="/dvorane/edit/:ime" element={<UrediDvoranu />} />
                 <Route path="/administratori" element={<Administrator />} />
             </Routes>
         </BrowserRouter>

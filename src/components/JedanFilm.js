@@ -25,6 +25,10 @@ function JedanFilm() {
         navigate("/filmovi");
     };
 
+    const updateFilm = async () => {
+        navigate(`/filmovi/edit/${id}`);
+    };
+
     return (
         <div className="App">
             <Navbar />
@@ -54,6 +58,7 @@ function JedanFilm() {
                 </table>
             </div>
             <button onClick={returnToFilmovi}>Povratak</button>
+            <button onClick={updateFilm}>Uredi informacije o filmu</button>
         </div>
     );
 }

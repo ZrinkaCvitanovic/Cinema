@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class SpremiFilmDto {
+    private Integer id;
     private String naziv;
     private Integer trajanjeMin;
     private Integer dobnaGranica;
@@ -13,6 +14,7 @@ public class SpremiFilmDto {
 
     public Film toDomain() {
         return Film.builder()
+                .id(id)
                 .naziv(naziv)
                 .trajanjeMin(trajanjeMin)
                 .dobnaGranica(dobnaGranica)

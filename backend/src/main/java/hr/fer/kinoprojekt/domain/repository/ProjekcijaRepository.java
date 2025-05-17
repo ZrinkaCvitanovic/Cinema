@@ -9,4 +9,5 @@ public interface ProjekcijaRepository {
     Projekcija getProjekcija(String id);
     void save(Projekcija projekcija);
     void deletePoId(String id);
+    List<Projekcija> filterByDvorana(String ime);
 }

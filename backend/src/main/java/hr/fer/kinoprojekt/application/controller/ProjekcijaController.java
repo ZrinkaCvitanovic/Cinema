@@ -27,6 +27,14 @@ public class ProjekcijaController {
         final Projekcija projekcije = projekcijaService.getProjekcijaPoId(id);
         return ResponseEntity.ok(ProjekcijaDto.fromDomain(projekcije));
     }
+
+    @GetMapping("/dvorana/{imeDvorane}")
+    public ResponseEntity<List<ProjekcijaDto>> getByImeDvorane(@PathVariable String imeDvorane) {
+        final List<Projekcija> projekcije = projekcijaService.filterByDvorana(imeDvorane);
+        final List<ProjekcijaDto> result = projekcije.stream().map(ProjekcijaDto::fromDomain).toList();
+        return ResponseEntity.ok(result);
+    }
+
     @PostMapping()
     public ResponseEntity<String> save(@RequestBody SpremiProjekcijeDto projekcijaDto) {
         try {

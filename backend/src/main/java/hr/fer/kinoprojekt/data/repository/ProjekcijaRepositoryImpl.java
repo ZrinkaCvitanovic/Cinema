@@ -33,7 +33,14 @@ public class ProjekcijaRepositoryImpl implements ProjekcijaRepository {
     public void deletePoId(String id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<Projekcija> filterByDvorana(String ime) {
+       return repository.getProjekcijaByDvorana_Ime(ime);
+    }
 }
 
 @Repository
-interface JpaProjekcijaRepository extends JpaRepository<Projekcija, String> {}
+interface JpaProjekcijaRepository extends JpaRepository<Projekcija, String> {
+    List<Projekcija> getProjekcijaByDvorana_Ime(String dvoranaIme);
+}

@@ -38,4 +38,8 @@ public class ProjekcijaService {
     public void delete(String id) {
         projekcijaRepository.deletePoId(id);
     }
+
+    public List<Projekcija> filterByDvorana(String ime) {
+        return projekcijaRepository.filterByDvorana(ime);
+    }
 }

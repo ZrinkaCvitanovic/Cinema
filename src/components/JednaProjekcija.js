@@ -55,7 +55,7 @@ function JednaProjekcija() {
                             <td>{details.datum}</td>
                             <td>{details.vrijemePoc}</td>
                             <td>{details.trajanjeMin}</td>
-                            <td>{details.mjesta}</td>
+                            <td>{details.slobodnaMjesta}</td>
                             <td>{details.unioProjekcija}</td>
                         </tr>
                     </tbody>

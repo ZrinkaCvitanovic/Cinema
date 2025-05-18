@@ -12,6 +12,8 @@ function Projekcija() {
     const [datum, setDatum] = useState("");
     const [vrijemePoc, setVrijemePoc] = useState("");
     const [mjesta, setMjesta] = useState(0);
+    const [criteria, setCriteria] = useState("id");
+    const [value, setValue] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -65,7 +67,6 @@ function Projekcija() {
                     .then((response) => response.json())
                     .then((data) => {
                         setProjekcije(data);
-                        console.log(data);
                     })
                     .catch((err) => {
                         console.log(err.message);
@@ -76,9 +77,45 @@ function Projekcija() {
         }
     };
 
+    const handleSearch = async (e) => {
+        e.preventDefault();
+
+        if (value === "") {
+            fetch("http://localhost:8080/api/projekcija/all")
+                .then((response) => response.json())
+                .then((data) => {
+                    setProjekcije(data);
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+        } else {
+            fetch(`http://localhost:8080/api/projekcija/${criteria}/${value}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setProjekcije(data);
+                    setValue("");
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+        }
+    };
+
     return (
         <div className="App">
             <Navbar />
+            <form onSubmit={handleSearch}>
+                <label>Odaberite kriterij za pretraživanje projekcija</label>
+                <select onChange={(e) => setCriteria(e.target.value)}>
+                    <option value="id">ID projekcije (default)</option>
+                    <option value="dvorana">Dvorana</option>
+                    <option value="film">Film</option>
+                    <option value="zaposlenik">zaposlenik</option>
+                </select>
+                <input type="text" onChange={(e) => setValue(e.target.value)}></input>
+                <button type="submit">Pretraži</button>
+            </form>
             <div>
                 <table>
                     <thead>

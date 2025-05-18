@@ -28,7 +28,7 @@ function UrediFilm() {
     }, [id]);
 
     const returnToFilmovi = async () => {
-        navigate("/filmovi");
+        navigate("/");
     };
 
     const handleSubmit = async (e) => {

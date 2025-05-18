@@ -8,16 +8,18 @@ import UrediFilm from "./components/UrediFilm";
 import JednaDvorana from "./components/JednaDvorana";
 import UrediDvoranu from "./components/UrediDvoranu";
 import Projekcija from "./components/Projekcija";
-import JednaProjekcija from "./components/JednaProjekcija";
 import UrediProjekciju from "./components/UrediProjekciju";
+import Home from "./components/Home";
+import FilmIProjekcije from "./FilmIProjekcije";
 
 function App() {
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Projekcija />} />
-                <Route path="/projekcije/:id" element={<JednaProjekcija />} />
+                <Route path="/" element={<Home />} />
+                <Route path="allinfo/:id" element={<FilmIProjekcije />} />
+                <Route path="/projekcije" element={<Projekcija />} />
                 <Route path="/projekcije/edit/:id" element={<UrediProjekciju />} />
                 <Route path="/filmovi" element={<Film />} />
                 <Route path="/filmovi/:id" element={<JedanFilm />} />

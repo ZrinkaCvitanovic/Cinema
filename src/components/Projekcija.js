@@ -27,8 +27,8 @@ function Projekcija() {
             });
     }, []);
 
-    const fetchOneProjekcija = async (id) => {
-        navigate(`/projekcije/${id}`);
+    const urediOneProjekcija = async (id) => {
+        navigate(`/projekcije/edit/${id}`);
     };
 
     const deleteProjekcija = async (id) => {
@@ -122,8 +122,12 @@ function Projekcija() {
                         <tr>
                             <th>ID</th>
                             <th>Dvorana</th>
-                            <th>Film</th>
-                            <th>Detalji</th>
+                            <th>Film (id)</th>
+                            <th>Datum</th>
+                            <th>Vrijeme početka</th>
+                            <th>Trajanje (u minutama)</th>
+                            <th>Broj slobodnih mjesta</th>
+                            <th>Unio</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,8 +137,13 @@ function Projekcija() {
                                     <td className="film-title">{p.id}</td>
                                     <td className="film-title">{p.imeDvorana}</td>
                                     <td>{p.idFilm}</td>
+                                    <td>{p.datum}</td>
+                                    <td>{p.vrijemePoc}</td>
+                                    <td>{p.trajanjeMin}</td>
+                                    <td>{p.slobodnaMjesta == null ? 0 : p.slobodnaMjesta}</td>
+                                    <td>{p.unioProjekcija}</td>
                                     <td>
-                                        <button onClick={() => fetchOneProjekcija(p.id)}> Detalji o projekciji </button>
+                                        <button onClick={() => urediOneProjekcija(p.id)}> Uredi projekciju </button>
                                     </td>
                                     <td className="button">
                                         <button className="delete-btn" onClick={() => deleteProjekcija(p.id)}>

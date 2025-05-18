@@ -10,4 +10,6 @@ public interface ProjekcijaRepository {
     void save(Projekcija projekcija);
     void deletePoId(String id);
     List<Projekcija> filterByDvorana(String ime);
+    List<Projekcija> filterByFilm(Integer film);
+    List<Projekcija> filterByZaposlenik(String ime);
 }

@@ -35,6 +35,21 @@ public class ProjekcijaController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/film/{idFilm}")
+    public ResponseEntity<List<ProjekcijaDto>> getByIdFilm(@PathVariable Integer idFilm) {
+        final List<Projekcija> projekcije = projekcijaService.filterByFilm(idFilm);
+        final List<ProjekcijaDto> result = projekcije.stream().map(ProjekcijaDto::fromDomain).toList();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/zaposlenik/{ime}")
+    public ResponseEntity<List<ProjekcijaDto>> getByZaposlenik(@PathVariable String ime) {
+        final List<Projekcija> projekcije = projekcijaService.filterByZaposlenik(ime);
+        final List<ProjekcijaDto> result = projekcije.stream().map(ProjekcijaDto::fromDomain).toList();
+        return ResponseEntity.ok(result);
+    }
+
+
     @PostMapping()
     public ResponseEntity<String> save(@RequestBody SpremiProjekcijeDto projekcijaDto) {
         try {

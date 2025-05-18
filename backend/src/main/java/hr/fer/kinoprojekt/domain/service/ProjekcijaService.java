@@ -42,4 +42,12 @@ public class ProjekcijaService {
     public List<Projekcija> filterByDvorana(String ime) {
         return projekcijaRepository.filterByDvorana(ime);
     }
+
+    public List<Projekcija> filterByFilm (Integer ime) {
+        return projekcijaRepository.filterByFilm(ime);
+    }
+
+    public List<Projekcija> filterByZaposlenik(String ime) {
+        return projekcijaRepository.filterByZaposlenik(ime);
+    }
 }

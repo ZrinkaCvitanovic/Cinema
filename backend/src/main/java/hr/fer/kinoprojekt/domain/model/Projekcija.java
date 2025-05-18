@@ -31,7 +31,7 @@ public class Projekcija {
     @JoinColumn(name = "idFilm", referencedColumnName = "id")
     private Film film;
 
-    private Integer trajanjeMin;
+    private Integer trajanjeMin = 0;
     private LocalTime vrijemePoc;
     private LocalDate datum;
     private Integer slobodnaMjesta;

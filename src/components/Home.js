@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Select, Option, Input, Button, Table, Box, h2, FormLabel } from "@mui/joy";
 
 import Navbar from "./Navbar";
 
@@ -143,39 +144,58 @@ function Home() {
     };
 
     return (
-        <div className="App">
+        <div>
             <Navbar />
-            <h2>Naziv filma</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Naziv</th>
-                        <th>Trajanje (min)</th>
-                        <th>Dobna granica</th>
-                        <th>Cijena ulaznice(€)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr key={filmData.id}>
-                        <td className="film-title">{filmData.id}</td>
-                        <td className="film-title">{filmData.naziv}</td>
-                        <td>{filmData.trajanjeMin}</td>
-                        <td>{filmData.dobnaGranica}</td>
-                        <td>{filmData.ulazEur}</td>
-                        <td>
-                            <button onClick={() => updateFilm()}> Uredi film </button>
-                        </td>
-                        <td className="button">
-                            <button className="delete-btn" onClick={() => deleteFilm(filmData.id)}>
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2>Informacije o filmu</h2>
+            <Box
+                sx={{
+                    my: 1,
+                    display: "flex",
+                    alignItems: "stretch",
+                    justifyContent: "space-around",
+                    gap: 4,
+                    p: 2,
+                }}
+            >
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Naziv</th>
+                            <th>Trajanje (min)</th>
+                            <th>Dobna granica</th>
+                            <th>Cijena ulaznice(€)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr key={filmData.id}>
+                            <td className="film-title">{filmData.id}</td>
+                            <td className="film-title">{filmData.naziv}</td>
+                            <td>{filmData.trajanjeMin}</td>
+                            <td>{filmData.dobnaGranica}</td>
+                            <td>{filmData.ulazEur}</td>
+                            <td>
+                                <Button color="success" onClick={() => updateFilm()}>
+                                    {" "}
+                                    Uredi{" "}
+                                </Button>
+                            </td>
+                            <td className="Button">
+                                <Button color="danger" onClick={() => deleteFilm(filmData.id)}>
+                                    Obriši
+                                </Button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </Box>
             <h2>Projekcije filma</h2>
-            <table>
+            <Table
+                sx={{
+                    my: 0,
+                    gap: 0,
+                }}
+            >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -183,7 +203,6 @@ function Home() {
                         <th>Film (id)</th>
                         <th>Datum</th>
                         <th>Vrijeme početka</th>
-                        <th>Trajanje (u minutama)</th>
                         <th>Broj slobodnih mjesta</th>
                         <th>Unio</th>
                     </tr>
@@ -197,58 +216,74 @@ function Home() {
                                 <td>{p.idFilm}</td>
                                 <td>{p.datum}</td>
                                 <td>{p.vrijemePoc}</td>
-                                <td>{p.trajanjeMin}</td>
                                 <td>{p.slobodnaMjesta == null ? 0 : p.slobodnaMjesta}</td>
                                 <td>{p.unioProjekcija}</td>
                                 <td>
-                                    <button onClick={() => urediOneProjekcija(p.id)}> Uredi projekciju </button>
+                                    <Button color="success" onClick={() => urediOneProjekcija(p.id)}>
+                                        Uredi
+                                    </Button>
                                 </td>
-                                <td className="button">
-                                    <button className="delete-btn" onClick={() => deleteProjekcija(p.id)}>
-                                        Delete
-                                    </button>
+                                <td className="Button">
+                                    <Button color="danger" onClick={() => deleteProjekcija(p.id)}>
+                                        Obriši
+                                    </Button>
                                 </td>
                             </tr>
                         );
                     })}
                 </tbody>
-            </table>
-            <div className="add-post-container">
+            </Table>
+            <Box
+                sx={{
+                    my: 1,
+                    display: "flex",
+                    alignItems: "start",
+                    justifyContent: "space-between",
+                    gap: 4,
+                    p: 5,
+                }}
+            >
                 <form onSubmit={handleSubmit}>
-                    <select onChange={(e) => setImeDvorana(e.target.value)}>
+                    <Select placeholder="dvorana" onChange={(e) => setImeDvorana(e.target.value)}>
                         {dvorane.map((d) => {
-                            return <option value={d}>{d}</option>;
+                            return <Option value={d}>{d}</Option>;
                         })}
-                    </select>
-                    <input type="number" value={filmData.id} readOnly></input>
-                    <input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></input>
-                    <input type="text" required placeholder="hh:mm:ss" onChange={(e) => setVrijemePoc(e.target.value)}></input>
-                    <input type="number" required placeholder="Trajanje" onChange={(e) => setTrajanjeMin(e.target.value)}></input>
-                    <input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></input>
-                    <select onChange={(e) => setUnioProjekcija(e.target.value)}>
+                    </Select>
+                    <Input type="number" value={filmData.id} readOnly></Input>
+                    <Input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></Input>
+                    <Input type="text" required placeholder="hh:mm" onChange={(e) => setVrijemePoc(e.target.value)}></Input>
+                    <Input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></Input>
+                    <Select placeholder="korisničko ime" onChange={(e) => setUnioProjekcija(e.target.value)}>
                         {admini.map((a) => {
-                            return <option value={a}>{a}</option>;
+                            return <Option value={a}>{a}</Option>;
                         })}
-                    </select>
-                    <button type="submit">Unesi projekciju</button>
+                    </Select>
+                    <FormLabel> </FormLabel>
+                    <Button color="warning" type="submit">
+                        Unesi projekciju
+                    </Button>
                 </form>
-            </div>
-            <button
-                onClick={() => {
-                    const previous = ids.indexOf(filmData.id) == 0 ? ids.length - 1 : ids.indexOf(filmData.id) - 1;
-                    fetchProjekcijeByFilm(ids[previous]);
-                }}
-            >
-                Prethodni
-            </button>
-            <button
-                onClick={() => {
-                    const next = (ids.indexOf(filmData.id) + 1) % ids.length;
-                    fetchProjekcijeByFilm(ids[next]);
-                }}
-            >
-                Sljedeći
-            </button>
+                <div>
+                    <Button
+                        color="light"
+                        onClick={() => {
+                            const previous = ids.indexOf(filmData.id) == 0 ? ids.length - 1 : ids.indexOf(filmData.id) - 1;
+                            fetchProjekcijeByFilm(ids[previous]);
+                        }}
+                    >
+                        Prethodni
+                    </Button>
+                    <Button
+                        color="light"
+                        onClick={() => {
+                            const next = (ids.indexOf(filmData.id) + 1) % ids.length;
+                            fetchProjekcijeByFilm(ids[next]);
+                        }}
+                    >
+                        Sljedeći
+                    </Button>
+                </div>
+            </Box>
         </div>
     );
 }

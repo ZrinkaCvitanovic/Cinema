@@ -67,7 +67,7 @@ function Film() {
                     });
             }
         } catch (err) {
-            throw new Error("Greška pri slanju podataka22");
+            throw new Error("Greška pri slanju podataka");
         }
     };
 

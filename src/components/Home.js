@@ -5,9 +5,9 @@ import Navbar from "./Navbar";
 
 function Home() {
     const [projekcije, setProjekcije] = useState([]);
-    const [imeDvorana, setImeDvorana] = useState("");
+    const [imeDvorana, setImeDvorana] = useState("dvorana01");
     const [idFilm, setIdFilm] = useState("");
-    const [unioProjekcija, setUnioProjekcija] = useState("");
+    const [unioProjekcija, setUnioProjekcija] = useState("admin1");
     const [trajanjeMin, setTrajanjeMin] = useState(0);
     const [datum, setDatum] = useState("");
     const [vrijemePoc, setVrijemePoc] = useState("");
@@ -40,11 +40,9 @@ function Home() {
                     allIds.push(d.id);
                 });
                 setids(allIds);
-                console.log("add ids: ", allIds);
-                console.log("current id:", allIds[currentFilm]);
-                console.log("number of films: ", allIds.length); //3
-                setNumFilms(allIds.length);
-                console.log("numFilms: ", numFilms); //0
+                //console.log("number of films: ", allIds.length); //3
+                //setNumFilms(allIds.length);
+                //console.log("numFilms: ", numFilms); //0
                 fetchProjekcijeByFilm(allIds[currentFilm]);
             })
             .catch((err) => {
@@ -56,6 +54,7 @@ function Home() {
                 data.map((d) => {
                     admini.push(d.korisnickoIme);
                 });
+                console.log(admini);
                 console.log(admini);
             });
     }, [currentFilm]);
@@ -231,6 +230,7 @@ function Home() {
                             return <option value={a}>{a}</option>;
                         })}
                     </select>
+                    <button type="submit">Unesi projekciju</button>
                 </form>
             </div>
             <button

@@ -6,6 +6,7 @@ import hr.fer.kinoprojekt.domain.model.Zaposlenik;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ZaposlenikRepository {
@@ -13,4 +14,6 @@ public interface ZaposlenikRepository {
     void saveBlagajnik(Blagajnik blagajnik);
     void saveAdministrator(Administrator administrator);
     void detetePoId(String id);
+
+    List<Administrator> getAdministrators();
 }

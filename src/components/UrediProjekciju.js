@@ -53,6 +53,8 @@ function UrediProjekciju() {
             if (!response.ok) {
                 throw new Error("Greška pri slanju podataka");
             } else {
+                navigate("/");
+                return;
                 fetch(`http://localhost:8080/api/projekcija/${id}`)
                     .then((response) => response.json())
                     .then((data) => {

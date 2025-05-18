@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class ZaposlenikRepositoryImpl implements ZaposlenikRepository {
@@ -44,6 +46,11 @@ public class ZaposlenikRepositoryImpl implements ZaposlenikRepository {
     public void detetePoId(final String id) {
         administratorRepository.deleteByIdAdmin(id);
         blagajnikRepository.deleteByIdBlagajnik(id);
+    }
+
+    @Override
+    public List<Administrator> getAdministrators() {
+        return administratorRepository.findAll();
     }
 }
 

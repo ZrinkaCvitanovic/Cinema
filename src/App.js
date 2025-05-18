@@ -10,7 +10,6 @@ import UrediDvoranu from "./components/UrediDvoranu";
 import Projekcija from "./components/Projekcija";
 import UrediProjekciju from "./components/UrediProjekciju";
 import Home from "./components/Home";
-import FilmIProjekcije from "./FilmIProjekcije";
 
 function App() {
     const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -18,7 +17,6 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="allinfo/:id" element={<FilmIProjekcije />} />
                 <Route path="/projekcije" element={<Projekcija />} />
                 <Route path="/projekcije/edit/:id" element={<UrediProjekciju />} />
                 <Route path="/filmovi" element={<Film />} />

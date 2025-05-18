@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "./Navbar";
-import FilmIProjekcije from "../FilmIProjekcije";
 
 function Home() {
     const [projekcije, setProjekcije] = useState([]);
@@ -18,11 +17,22 @@ function Home() {
     const [filmData, setFilmData] = useState([]);
     const [numFilms, setNumFilms] = useState(0);
     const [ids, setids] = useState([]);
+    const [dvorane, setDvorane] = useState([]);
+    const [admini, setAdmini] = useState([]);
+
     const navigate = useNavigate();
 
     const allIds = [];
 
     useEffect(() => {
+        fetch("http://localhost:8080/api/dvorana/all")
+            .then((response) => response.json())
+            .then((data) => {
+                data.map((d) => {
+                    dvorane.push(d.ime);
+                });
+                console.log(dvorane);
+            });
         fetch("http://localhost:8080/api/film/all")
             .then((response) => response.json())
             .then((data) => {
@@ -39,6 +49,14 @@ function Home() {
             })
             .catch((err) => {
                 console.log(err);
+            });
+        fetch("http://localhost:8080/api/admin/all")
+            .then((response) => response.json())
+            .then((data) => {
+                data.map((d) => {
+                    admini.push(d.korisnickoIme);
+                });
+                console.log(admini);
             });
     }, [currentFilm]);
 
@@ -86,7 +104,7 @@ function Home() {
     };
 
     const updateFilm = async () => {
-        navigate(`/filmovi/edit/${idFilm}`);
+        navigate(`/filmovi/edit/${filmData.id}`);
     };
 
     const handleSubmit = async (e) => {
@@ -95,7 +113,7 @@ function Home() {
         const payload = {
             imeDvorana: imeDvorana,
             trajanjeMin: parseInt(trajanjeMin),
-            idFilm: parseInt(idFilm),
+            idFilm: parseInt(filmData.id),
             slobodnaMjesta: parseInt(mjesta),
             datum: datum,
             vrijemePoc: vrijemePoc,
@@ -111,7 +129,7 @@ function Home() {
             if (!response.ok) {
                 throw new Error("Greška pri slanju podataka");
             } else {
-                fetch("http://localhost:8080/api/projekcija/all")
+                fetch(`http://localhost:8080/api/projekcija/film/${filmData.id}`)
                     .then((response) => response.json())
                     .then((data) => {
                         setProjekcije(data);
@@ -147,7 +165,7 @@ function Home() {
                         <td>{filmData.dobnaGranica}</td>
                         <td>{filmData.ulazEur}</td>
                         <td>
-                            <button> Uredi film </button>
+                            <button onClick={() => updateFilm()}> Uredi film </button>
                         </td>
                         <td className="button">
                             <button className="delete-btn" onClick={() => deleteFilm(filmData.id)}>
@@ -157,6 +175,7 @@ function Home() {
                     </tr>
                 </tbody>
             </table>
+            <h2>Projekcije filma</h2>
             <table>
                 <thead>
                     <tr>
@@ -197,14 +216,21 @@ function Home() {
             </table>
             <div className="add-post-container">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" required size="30" placeholder="dvoranaXX" onChange={(e) => setImeDvorana(e.target.value)} />
-                    <input type="number" required placeholder="ID filma" onChange={(e) => setIdFilm(e.target.value)}></input>
+                    <select onChange={(e) => setImeDvorana(e.target.value)}>
+                        {dvorane.map((d) => {
+                            return <option value={d}>{d}</option>;
+                        })}
+                    </select>
+                    <input type="number" value={filmData.id} readOnly></input>
                     <input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></input>
                     <input type="text" required placeholder="hh:mm:ss" onChange={(e) => setVrijemePoc(e.target.value)}></input>
                     <input type="number" required placeholder="Trajanje" onChange={(e) => setTrajanjeMin(e.target.value)}></input>
                     <input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></input>
-                    <input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setUnioProjekcija(e.target.value)}></input>
-                    <button type="submit">Dodaj projekciju</button>
+                    <select onChange={(e) => setUnioProjekcija(e.target.value)}>
+                        {admini.map((a) => {
+                            return <option value={a}>{a}</option>;
+                        })}
+                    </select>
                 </form>
             </div>
             <button
@@ -217,7 +243,8 @@ function Home() {
             </button>
             <button
                 onClick={() => {
-                    fetchProjekcijeByFilm(ids[(ids.indexOf(filmData.id) + 1) % ids.length]);
+                    const next = (ids.indexOf(filmData.id) + 1) % ids.length;
+                    fetchProjekcijeByFilm(ids[next]);
                 }}
             >
                 Sljedeći

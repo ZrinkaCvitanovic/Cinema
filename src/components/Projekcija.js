@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Select, Option, Input, Button, Table, FormLabel } from "@mui/joy";
 
 import Navbar from "./Navbar";
+import "../App.css";
 
 function Projekcija() {
     const [projekcije, setProjekcije] = useState([]);
@@ -106,66 +108,70 @@ function Projekcija() {
         <div className="App">
             <Navbar />
             <form onSubmit={handleSearch}>
-                <label>Odaberite kriterij za pretraživanje projekcija</label>
-                <select onChange={(e) => setCriteria(e.target.value)}>
-                    <option value="id">ID projekcije (default)</option>
-                    <option value="dvorana">Dvorana</option>
-                    <option value="film">Film</option>
-                    <option value="zaposlenik">zaposlenik</option>
-                </select>
-                <input type="text" onChange={(e) => setValue(e.target.value)}></input>
-                <button type="submit">Pretraži</button>
+                <Select onChange={(e) => setCriteria(e.target.value)} placeholder="Odaberite kriterij iz padajućeg izbornika">
+                    <Option value="id">ID projekcije (default)</Option>
+                    <Option value="dvorana">Dvorana</Option>
+                    <Option value="film">Film</Option>
+                    <Option value="zaposlenik">zaposlenik</Option>
+                </Select>
+                <Input type="text" onChange={(e) => setValue(e.target.value)}></Input>
+                <Button variant="soft" type="submit">
+                    Pretraži
+                </Button>
             </form>
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Dvorana</th>
-                            <th>Film (id)</th>
-                            <th>Datum</th>
-                            <th>Vrijeme početka</th>
-                            <th>Trajanje (u minutama)</th>
-                            <th>Broj slobodnih mjesta</th>
-                            <th>Unio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {projekcije.map((p) => {
-                            return (
-                                <tr key={p.id}>
-                                    <td className="film-title">{p.id}</td>
-                                    <td className="film-title">{p.imeDvorana}</td>
-                                    <td>{p.idFilm}</td>
-                                    <td>{p.datum}</td>
-                                    <td>{p.vrijemePoc}</td>
-                                    <td>{p.trajanjeMin}</td>
-                                    <td>{p.slobodnaMjesta == null ? 0 : p.slobodnaMjesta}</td>
-                                    <td>{p.unioProjekcija}</td>
-                                    <td>
-                                        <button onClick={() => urediOneProjekcija(p.id)}> Uredi projekciju </button>
-                                    </td>
-                                    <td className="button">
-                                        <button className="delete-btn" onClick={() => deleteProjekcija(p.id)}>
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </div>
-            <div className="add-post-container">
+            <Table variant="soft">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Dvorana</th>
+                        <th>Film (id)</th>
+                        <th>Datum</th>
+                        <th>Vrijeme početka</th>
+                        <th>Trajanje (min)</th>
+                        <th>Broj slobodnih mjesta</th>
+                        <th>Unio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {projekcije.map((p) => {
+                        return (
+                            <tr key={p.id}>
+                                <td className="film-title">{p.id}</td>
+                                <td className="film-title">{p.imeDvorana}</td>
+                                <td>{p.idFilm}</td>
+                                <td>{p.datum}</td>
+                                <td>{p.vrijemePoc}</td>
+                                <td>{p.trajanjeMin}</td>
+                                <td>{p.slobodnaMjesta == null ? 0 : p.slobodnaMjesta}</td>
+                                <td>{p.unioProjekcija}</td>
+                                <td>
+                                    <Button size="sm" color="success" onClick={() => urediOneProjekcija(p.id)}>
+                                        {" "}
+                                        Uredi projekciju{" "}
+                                    </Button>
+                                </td>
+                                <td className="Button">
+                                    <Button size="sm" color="danger" onClick={() => deleteProjekcija(p.id)}>
+                                        Delete
+                                    </Button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </Table>
+            <div style={{ marginTop: 40 + "px" }}>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" required size="30" placeholder="dvoranaXX" onChange={(e) => setImeDvorana(e.target.value)} />
-                    <input type="number" required placeholder="ID filma" onChange={(e) => setIdFilm(e.target.value)}></input>
-                    <input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></input>
-                    <input type="text" required placeholder="hh:mm:ss" onChange={(e) => setVrijemePoc(e.target.value)}></input>
-                    <input type="number" required placeholder="Trajanje" onChange={(e) => setTrajanjeMin(e.target.value)}></input>
-                    <input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></input>
-                    <input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setUnioProjekcija(e.target.value)}></input>
-                    <button type="submit">Dodaj projekciju</button>
+                    <Input type="text" required placeholder="dvoranaXX" onChange={(e) => setImeDvorana(e.target.value)} />
+                    <Input type="number" required placeholder="ID filma" onChange={(e) => setIdFilm(e.target.value)}></Input>
+                    <Input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></Input>
+                    <Input type="text" required placeholder="hh:mm" onChange={(e) => setVrijemePoc(e.target.value)}></Input>
+                    <Input type="number" required placeholder="Trajanje" onChange={(e) => setTrajanjeMin(e.target.value)}></Input>
+                    <Input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></Input>
+                    <Input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setUnioProjekcija(e.target.value)}></Input>
+                    <Button size="sm" color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
+                        Dodaj projekciju
+                    </Button>
                 </form>
             </div>
         </div>

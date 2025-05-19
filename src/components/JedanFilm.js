@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
+import { Button, Box } from "@mui/joy";
 
 function JedanFilm() {
     const [details, setDetails] = useState([]);
@@ -57,8 +58,10 @@ function JedanFilm() {
                     </tbody>
                 </table>
             </div>
-            <button onClick={returnToFilmovi}>Povratak</button>
-            <button onClick={updateFilm}>Uredi informacije o filmu</button>
+            <Box>
+                <Button onClick={returnToFilmovi}>Povratak</Button>
+                <Button onClick={updateFilm}>Uredi informacije o filmu</Button>
+            </Box>
         </div>
     );
 }

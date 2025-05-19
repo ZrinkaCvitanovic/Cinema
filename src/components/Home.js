@@ -157,7 +157,7 @@ function Home() {
                     p: 2,
                 }}
             >
-                <Table>
+                <Table aria-label="table variants" variant="soft">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -165,6 +165,7 @@ function Home() {
                             <th>Trajanje (min)</th>
                             <th>Dobna granica</th>
                             <th>Cijena ulaznice(€)</th>
+                            <th colSpan={2}></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -175,13 +176,13 @@ function Home() {
                             <td>{filmData.dobnaGranica}</td>
                             <td>{filmData.ulazEur}</td>
                             <td>
-                                <Button color="success" onClick={() => updateFilm()}>
+                                <Button color="success" size="sm" onClick={() => updateFilm()}>
                                     {" "}
                                     Uredi{" "}
                                 </Button>
                             </td>
                             <td className="Button">
-                                <Button color="danger" onClick={() => deleteFilm(filmData.id)}>
+                                <Button color="danger" size="sm" onClick={() => deleteFilm(filmData.id)}>
                                     Obriši
                                 </Button>
                             </td>
@@ -190,12 +191,7 @@ function Home() {
                 </Table>
             </Box>
             <h2>Projekcije filma</h2>
-            <Table
-                sx={{
-                    my: 0,
-                    gap: 0,
-                }}
-            >
+            <Table aria-label="table variants" variant="soft">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -205,6 +201,7 @@ function Home() {
                         <th>Vrijeme početka</th>
                         <th>Broj slobodnih mjesta</th>
                         <th>Unio</th>
+                        <th colSpan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -219,12 +216,12 @@ function Home() {
                                 <td>{p.slobodnaMjesta == null ? 0 : p.slobodnaMjesta}</td>
                                 <td>{p.unioProjekcija}</td>
                                 <td>
-                                    <Button color="success" onClick={() => urediOneProjekcija(p.id)}>
+                                    <Button color="success" size="sm" onClick={() => urediOneProjekcija(p.id)}>
                                         Uredi
                                     </Button>
                                 </td>
                                 <td className="Button">
-                                    <Button color="danger" onClick={() => deleteProjekcija(p.id)}>
+                                    <Button color="danger" size="sm" onClick={() => deleteProjekcija(p.id)}>
                                         Obriši
                                     </Button>
                                 </td>
@@ -259,7 +256,7 @@ function Home() {
                         })}
                     </Select>
                     <FormLabel> </FormLabel>
-                    <Button color="warning" type="submit">
+                    <Button color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
                         Unesi projekciju
                     </Button>
                 </form>

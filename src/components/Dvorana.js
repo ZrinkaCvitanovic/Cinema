@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Table, Input, Select, Option, Button } from "@mui/joy";
 
 import Navbar from "./Navbar";
 
@@ -76,7 +77,7 @@ function Dvorana() {
         <div className="App">
             <Navbar />
             <div>
-                <table>
+                <Table sx={{ textAlign: "left" }} variant="soft">
                     <thead>
                         <tr>
                             <th>Ime</th>
@@ -90,30 +91,35 @@ function Dvorana() {
                                 <tr key={d.ime}>
                                     <td className="film-title">{d.ime}</td>
                                     <td>
-                                        <button onClick={() => fetchOneDvorana(d.ime)}> Detalji o dvorani </button>
+                                        <Button variant="soft" onClick={() => fetchOneDvorana(d.ime)}>
+                                            {" "}
+                                            Detalji o dvorani{" "}
+                                        </Button>
                                     </td>
-                                    <td className="button">
-                                        <button className="delete-btn" onClick={() => deleteDvorana(d.ime)}>
+                                    <td className="Button">
+                                        <Button color="danger" onClick={() => deleteDvorana(d.ime)}>
                                             Delete
-                                        </button>
+                                        </Button>
                                     </td>
                                 </tr>
                             );
                         })}
                     </tbody>
-                </table>
+                </Table>
             </div>
             <div className="add-post-container">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" size="30" value={ime} placeholder="format: dvoranaXX" required onChange={(e) => setIme(e.target.value)} />
-                    <input type="number" min="0" placeholder="Broj mjesta u dvorani" required onChange={(e) => setKapacitet(e.target.value)}></input>
-                    <select onChange={(e) => setOtvorena(e.target.value === "otvorena" ? true : false)} required>
-                        <option>otvorena</option>
-                        <option>zatvorena</option>
-                    </select>
-                    <input required type="text" placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></input>
+                    <Input type="text" value={ime} placeholder="format: dvoranaXX" required onChange={(e) => setIme(e.target.value)} />
+                    <Input type="number" min="0" placeholder="Broj mjesta u dvorani" required onChange={(e) => setKapacitet(e.target.value)}></Input>
+                    <Select placeholder="otvorena/zatvorena" onChange={(e) => setOtvorena(e.target.value === "otvorena" ? true : false)} required>
+                        <Option>otvorena</Option>
+                        <Option>zatvorena</Option>
+                    </Select>
+                    <Input required type="text" placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></Input>
 
-                    <button type="submit">Dodaj dvoranu</button>
+                    <Button color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
+                        Dodaj dvoranu
+                    </Button>
                 </form>
             </div>
         </div>

@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { Button, Input, Table } from "@mui/joy";
 
 import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 function UrediFilm() {
     const [details, setDetails] = useState([]);
@@ -70,7 +73,7 @@ function UrediFilm() {
         <div className="App">
             <Navbar />
             <h2>Uredi informacije o filmu</h2>
-            <table>
+            <Table>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -91,18 +94,20 @@ function UrediFilm() {
                         <td>{details.unioZaposlenik}</td>
                     </tr>
                 </tbody>
-            </table>
+            </Table>
             <div className="add-post-container">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" size="70" placeholder="naziv" onClick={(e) => setNaziv(e.target.value)}></input>
-                    <input type="number" placeholder="trajanje u min" onChange={(e) => setTrajanje(e.target.value)}></input>
-                    <input type="number" placeholder="cijena" min="0" max="20" step="0.01" onChange={(e) => setCijena(e.target.value)}></input>
-                    <input type="number" placeholder="dobna granica" onChange={(e) => setDob(e.target.value)}></input>
-                    <input type="text" placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></input>
-                    <button type="submit">Uredi film</button>
+                    <Input type="text" size="70" placeholder="naziv" onClick={(e) => setNaziv(e.target.value)}></Input>
+                    <Input type="number" placeholder="trajanje u min" onChange={(e) => setTrajanje(e.target.value)}></Input>
+                    <Input type="number" placeholder="cijena u eurima (xx.xx)" min="0" max="20" step="0.01" onChange={(e) => setCijena(e.target.value)}></Input>
+                    <Input type="number" placeholder="dobna granica" onChange={(e) => setDob(e.target.value)}></Input>
+                    <Input type="text" placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></Input>
+                    <Button type="submit" color="success">
+                        Uredi film
+                    </Button>
+                    <Button onClick={returnToFilmovi}>Povratak</Button>
                 </form>
             </div>
-            <button onClick={returnToFilmovi}>Povratak</button>
         </div>
     );
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Table, Input, Button } from "@mui/joy";
 
 import Navbar from "./Navbar";
 
@@ -74,44 +75,47 @@ function Film() {
     return (
         <div className="App">
             <Navbar />
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Naziv</th>
-                            <th>Detalji</th>
-                            <th>Izmjene</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filmovi.map((film) => {
-                            return (
-                                <tr key={film.id}>
-                                    <td className="film-title">{film.id}</td>
-                                    <td className="film-title">{film.naziv}</td>
-                                    <td>
-                                        <button onClick={() => fetchOneFilm(film.id)}> Detalji o filmu </button>
-                                    </td>
-                                    <td className="button">
-                                        <button className="delete-btn" onClick={() => deleteFilm(film.id)}>
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </div>
-            <div className="add-post-container">
+            <Table sx={{ textAlign: "left" }} variant="soft">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Naziv</th>
+                        <th>Detalji</th>
+                        <th>Izmjene</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filmovi.map((film) => {
+                        return (
+                            <tr key={film.id}>
+                                <td className="film-title">{film.id}</td>
+                                <td className="film-title">{film.naziv}</td>
+                                <td>
+                                    <Button variant="soft" onClick={() => fetchOneFilm(film.id)}>
+                                        {" "}
+                                        Detalji o filmu{" "}
+                                    </Button>
+                                </td>
+                                <td className="Button">
+                                    <Button color="danger" onClick={() => deleteFilm(film.id)}>
+                                        Delete
+                                    </Button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </Table>
+            <div style={{ marginTop: 70 + "px" }}>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" required size="70" value={naziv} placeholder="Naziv filma" onChange={(e) => setNaziv(e.target.value)} />
-                    <input type="number" required placeholder="Trajanje u minutama" onChange={(e) => setTrajanje(e.target.value)}></input>
-                    <input type="number" required min="0" max="20" step="0.01" placeholder="xx.xx" onChange={(e) => setCijena(e.target.value)}></input>
-                    <input type="number" required placeholder="Dobno ogrančenje" onChange={(e) => setDob(e.target.value)}></input>
-                    <input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></input>
-                    <button type="submit">Dodaj film</button>
+                    <Input type="text" required value={naziv} placeholder="Naziv filma" onChange={(e) => setNaziv(e.target.value)} />
+                    <Input type="number" required placeholder="Trajanje u minutama" onChange={(e) => setTrajanje(e.target.value)}></Input>
+                    <Input type="number" required min="0" max="20" step="0.01" placeholder="xx.xx" onChange={(e) => setCijena(e.target.value)}></Input>
+                    <Input type="number" required placeholder="Dobno ogrančenje" onChange={(e) => setDob(e.target.value)}></Input>
+                    <Input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></Input>
+                    <Button color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
+                        Dodaj film
+                    </Button>
                 </form>
             </div>
         </div>

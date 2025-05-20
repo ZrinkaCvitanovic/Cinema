@@ -31,4 +31,8 @@ public class Projekcija {
     private LocalTime vrijemePoc;
     private LocalDate datum;
     private Integer slobodnaMjesta;
+
+    @ManyToOne
+    @JoinColumn(name = "idTip", referencedColumnName = "id")
+    private TipProjekcije tip;
 }

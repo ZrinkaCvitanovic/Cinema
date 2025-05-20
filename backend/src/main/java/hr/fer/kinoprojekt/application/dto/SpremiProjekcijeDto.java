@@ -16,6 +16,7 @@ public class SpremiProjekcijeDto {
     private String vrijemePoc;
     private String datum;
     private Integer slobodnaMjesta;
+    private Integer idTip;
 
     public Projekcija toDomain() {
         return Projekcija.builder()

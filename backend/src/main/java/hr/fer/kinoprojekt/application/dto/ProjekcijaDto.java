@@ -18,6 +18,7 @@ public class ProjekcijaDto {
     private String vrijemePoc;
     private String datum;
     private Integer slobodnaMjesta;
+    private Integer idTip;
 
     public static ProjekcijaDto fromDomain(Projekcija projekcija) {
         return ProjekcijaDto.builder()
@@ -28,6 +29,7 @@ public class ProjekcijaDto {
                 .vrijemePoc(projekcija.getVrijemePoc().toString())
                 .datum(projekcija.getDatum().toString())
                 .slobodnaMjesta(projekcija.getSlobodnaMjesta())
+                .idTip(projekcija.getTip().getId())
                 .build();
     }
 }

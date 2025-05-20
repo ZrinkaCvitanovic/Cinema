@@ -46,7 +46,7 @@ public class ProjekcijaController {
     @PostMapping()
     public ResponseEntity<String> save(@RequestBody SpremiProjekcijeDto projekcijaDto) {
         try {
-            projekcijaService.save(projekcijaDto.toDomain(), projekcijaDto.getImeDvorana(), projekcijaDto.getIdFilm());
+            projekcijaService.save(projekcijaDto.toDomain(), projekcijaDto.getImeDvorana(), projekcijaDto.getIdFilm(), projekcijaDto.getIdTip());
             return ResponseEntity.ok("Success");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

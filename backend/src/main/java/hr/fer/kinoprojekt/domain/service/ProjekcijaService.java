@@ -1,9 +1,11 @@
 package hr.fer.kinoprojekt.domain.service;
 
 import hr.fer.kinoprojekt.domain.model.Projekcija;
+import hr.fer.kinoprojekt.domain.model.TipProjekcije;
 import hr.fer.kinoprojekt.domain.repository.DvoranaRepository;
 import hr.fer.kinoprojekt.domain.repository.FilmRepository;
 import hr.fer.kinoprojekt.domain.repository.ProjekcijaRepository;
+import hr.fer.kinoprojekt.domain.repository.TipProjekcijeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ public class ProjekcijaService {
     private ProjekcijaRepository projekcijaRepository;
     private DvoranaRepository dvoranaRepository;
     private FilmRepository filmRepository;
+    private TipProjekcijeRepository tipProjekcijeRepository;
 
     public List<Projekcija> getProjekcije() {
         return projekcijaRepository.getProjekcije();
@@ -25,11 +28,12 @@ public class ProjekcijaService {
         return projekcijaRepository.getProjekcija(id);
     }
 
-    public void save(Projekcija projekcija, String imeDvorana, Integer idFilm) {
+    public void save(Projekcija projekcija, String imeDvorana, Integer idFilm, Integer idTip) {
         projekcija.setDvorana(dvoranaRepository.getDvorana(imeDvorana));
         projekcija.setFilm(filmRepository.getFilm(idFilm));
+        TipProjekcije tip = tipProjekcijeRepository.getTipProjekcije(idTip);
+        projekcija.setTip(tip);
         projekcijaRepository.save(projekcija);
-
     }
 
     public void delete(String id) {

@@ -35,7 +35,18 @@ public class DvoranaController {
     }
 
     @PostMapping(consumes = {"*/*"})
-    public ResponseEntity<String> save(@RequestBody DvoranaDto dto) {
+    public ResponseEntity<String> create(@RequestBody DvoranaDto dto) {
+        try {
+            service.save(dto.toDomain());
+            return ResponseEntity.ok("SUCCESS!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PutMapping(consumes = {"*/*"})
+    public ResponseEntity<String> edit(@RequestBody DvoranaDto dto) {
         try {
             service.save(dto.toDomain());
             return ResponseEntity.ok("SUCCESS!");

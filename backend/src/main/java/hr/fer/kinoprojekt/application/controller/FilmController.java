@@ -40,7 +40,18 @@ public class FilmController {
     }
 
     @PostMapping(consumes = {"*/*"})
-    public ResponseEntity<String> save(@RequestBody SpremiFilmDto dto) {
+    public ResponseEntity<String> create(@RequestBody SpremiFilmDto dto) {
+        try {
+            service.save(dto.toDomain(), dto.getIdRedatelj());
+            return ResponseEntity.ok("SUCCESS!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PutMapping(consumes = {"*/*"})
+    public ResponseEntity<String> update(@RequestBody SpremiFilmDto dto) {
         try {
             service.save(dto.toDomain(), dto.getIdRedatelj());
             return ResponseEntity.ok("SUCCESS!");

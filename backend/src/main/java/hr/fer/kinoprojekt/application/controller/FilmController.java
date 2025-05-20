@@ -1,9 +1,12 @@
 package hr.fer.kinoprojekt.application.controller;
 
 import hr.fer.kinoprojekt.application.dto.FilmDto;
+import hr.fer.kinoprojekt.application.dto.ProjekcijaDto;
 import hr.fer.kinoprojekt.application.dto.SpremiFilmDto;
 import hr.fer.kinoprojekt.domain.model.Film;
+import hr.fer.kinoprojekt.domain.model.Projekcija;
 import hr.fer.kinoprojekt.domain.service.FilmService;
+import hr.fer.kinoprojekt.domain.service.ProjekcijaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,7 @@ import java.util.List;
 public class FilmController {
 
     private FilmService service;
+    private ProjekcijaService projekcijaService;
 
     @GetMapping("/all")
     public ResponseEntity<List<FilmDto>> getAllFilms() {
@@ -28,7 +32,11 @@ public class FilmController {
     @GetMapping("/{id}")
     public ResponseEntity<FilmDto> getFilmById(@PathVariable Integer id) {
         final Film film = service.getFilm(id);
-        return ResponseEntity.ok(FilmDto.fromDomain(film));
+        List<Projekcija> projekcijaList = projekcijaService.filterByFilm(id);
+        List<ProjekcijaDto> projekcijaDtos = projekcijaList.stream().map(ProjekcijaDto::fromDomain).toList();
+        FilmDto filmdto = FilmDto.fromDomain(film);
+        filmdto.setProjekcijaDtoList(projekcijaDtos);
+        return ResponseEntity.ok(filmdto);
     }
 
     @PostMapping(consumes = {"*/*"})

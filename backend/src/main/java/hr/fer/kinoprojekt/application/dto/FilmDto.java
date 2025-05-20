@@ -5,6 +5,8 @@ import hr.fer.kinoprojekt.domain.model.Redatelj;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class FilmDto {
@@ -14,6 +16,7 @@ public class FilmDto {
     private Integer dobnaGranica;
     private Double ulazEur;
     private Redatelj redatelj;
+    private List<ProjekcijaDto> projekcijaDtoList;
 
     public static FilmDto fromDomain(Film domain) {
         return FilmDto.builder()

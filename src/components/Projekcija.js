@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Select, Option, Input, Button, Table, FormLabel } from "@mui/joy";
+import { Select, Option, Input, Button, Table } from "@mui/joy";
 
 import Navbar from "./Navbar";
-import "../App.css";
+import Redatelj from "./Redatelj";
 
 function Projekcija() {
     const [projekcije, setProjekcije] = useState([]);
@@ -53,7 +53,6 @@ function Projekcija() {
             slobodnaMjesta: parseInt(mjesta),
             datum: datum,
             vrijemePoc: vrijemePoc,
-            unioProjekcija: unioProjekcija,
         };
 
         try {
@@ -63,7 +62,7 @@ function Projekcija() {
                 body: JSON.stringify(payload),
             });
             if (!response.ok) {
-                throw new Error("Greška pri slanju podataka");
+                throw new Error("Greška pri slanju podataka - neočekivan odgovor poslužitelja");
             } else {
                 fetch("http://localhost:8080/api/projekcija/all")
                     .then((response) => response.json())
@@ -75,7 +74,7 @@ function Projekcija() {
                     });
             }
         } catch (err) {
-            throw new Error("Greška pri slanju podataka22");
+            throw new Error("Greška pri slanju podataka - podatci nisu u ispravnom formatu");
         }
     };
 
@@ -112,7 +111,6 @@ function Projekcija() {
                     <Option value="id">ID projekcije (default)</Option>
                     <Option value="dvorana">Dvorana</Option>
                     <Option value="film">Film</Option>
-                    <Option value="zaposlenik">zaposlenik</Option>
                 </Select>
                 <Input type="text" onChange={(e) => setValue(e.target.value)}></Input>
                 <Button variant="soft" type="submit">
@@ -129,7 +127,6 @@ function Projekcija() {
                         <th>Vrijeme početka</th>
                         <th>Trajanje (min)</th>
                         <th>Broj slobodnih mjesta</th>
-                        <th>Unio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,7 +140,6 @@ function Projekcija() {
                                 <td>{p.vrijemePoc}</td>
                                 <td>{p.trajanjeMin}</td>
                                 <td>{p.slobodnaMjesta == null ? 0 : p.slobodnaMjesta}</td>
-                                <td>{p.unioProjekcija}</td>
                                 <td>
                                     <Button size="sm" color="success" onClick={() => urediOneProjekcija(p.id)}>
                                         {" "}
@@ -152,7 +148,7 @@ function Projekcija() {
                                 </td>
                                 <td className="Button">
                                     <Button size="sm" color="danger" onClick={() => deleteProjekcija(p.id)}>
-                                        Delete
+                                        Obriši
                                     </Button>
                                 </td>
                             </tr>
@@ -168,7 +164,6 @@ function Projekcija() {
                     <Input type="text" required placeholder="hh:mm" onChange={(e) => setVrijemePoc(e.target.value)}></Input>
                     <Input type="number" required placeholder="Trajanje" onChange={(e) => setTrajanjeMin(e.target.value)}></Input>
                     <Input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></Input>
-                    <Input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setUnioProjekcija(e.target.value)}></Input>
                     <Button size="sm" color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
                         Dodaj projekciju
                     </Button>

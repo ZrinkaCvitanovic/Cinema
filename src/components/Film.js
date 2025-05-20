@@ -56,7 +56,7 @@ function Film() {
                 body: JSON.stringify(payload),
             });
             if (!response.ok) {
-                throw new Error("Greška pri slanju podataka");
+                throw new Error("Greška pri slanju podataka - neočekivan odgovor poslužitelja");
             } else {
                 fetch("http://localhost:8080/api/film/all")
                     .then((response) => response.json())
@@ -68,7 +68,7 @@ function Film() {
                     });
             }
         } catch (err) {
-            throw new Error("Greška pri slanju podataka");
+            throw new Error("Greška pri slanju podataka  - podatci nisu u ispravnom formatu");
         }
     };
 

@@ -17,6 +17,12 @@ const Navbar = () => {
                     <li>
                         <a href="/dvorane">Dvorane</a>
                     </li>
+                    <li>
+                        <a href="/redatelji">Redatelji</a>
+                    </li>
+                    <li>
+                        <a href="/tipovi">Tipovi projekcija</a>
+                    </li>
                 </ul>
             </div>
         </nav>

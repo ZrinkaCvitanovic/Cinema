@@ -54,7 +54,7 @@ function Dvorana() {
                     body: JSON.stringify(payload),
                 });
                 if (!response.ok) {
-                    throw new Error("Greška - response not ok");
+                    throw new Error("Greška - neočekivan odgovor poslužitelja");
                 } else {
                     fetch("http://localhost:8080/api/dvorana/all")
                         .then((response) => response.json())
@@ -66,7 +66,7 @@ function Dvorana() {
                         });
                 }
             } catch (err) {
-                throw new Error("Greška pri slanju podataka - nije se dogodio fetch");
+                throw new Error("Greška pri slanju podataka - podatci nisu u ispravnom formatu");
             }
         } else {
             throw new Error("Ime dvorane nije u ispravnom formatu!");
@@ -98,7 +98,7 @@ function Dvorana() {
                                     </td>
                                     <td className="Button">
                                         <Button color="danger" onClick={() => deleteDvorana(d.ime)}>
-                                            Delete
+                                            Obriši
                                         </Button>
                                     </td>
                                 </tr>

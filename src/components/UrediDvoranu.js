@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
+import { Button, Table, Input, Select, Option } from "@mui/joy";
 
 function UrediDvoranu() {
     const [details, setDetails] = useState([]);
@@ -44,7 +45,7 @@ function UrediDvoranu() {
                 body: JSON.stringify(payload),
             });
             if (!response.ok) {
-                throw new Error("Greška pri slanju podataka");
+                throw new Error("Greška pri slanju podataka - neočekivan odgovor poslužitelja");
             } else {
                 fetch(`http://localhost:8080/api/dvorana/${ime}`)
                     .then((response) => response.json())
@@ -56,7 +57,7 @@ function UrediDvoranu() {
                     });
             }
         } catch (err) {
-            throw new Error("Greška pri slanju podataka22");
+            throw new Error("Greška pri slanju podataka - podatci nisu u ispravnom formatu");
         }
     };
 
@@ -64,7 +65,7 @@ function UrediDvoranu() {
         <div className="App">
             <Navbar />
             <h2>Uredi informacije o dvorani</h2>
-            <table>
+            <Table>
                 <thead>
                     <tr>
                         <th>Ime</th>
@@ -81,21 +82,23 @@ function UrediDvoranu() {
                         <td>{details.unioZaposlenik}</td>
                     </tr>
                 </tbody>
-            </table>
+            </Table>
             <div className="add-post-container">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" size="30" value={ime} placeholder="dvoranaXX" required />
-                    <input type="number" min="0" placeholder="Broj mjesta u dvorani" required onChange={(e) => setKapacitet(e.target.value)}></input>
-                    <select onChange={(e) => setOtvorena(e.target.value === "otvorena" ? true : false)} required>
-                        <option value="otvorena">otvorena</option>
-                        <option value="zatvorena">zatvorena</option>
-                    </select>
-                    <input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></input>
+                    <Input type="text" size="30" value={ime} placeholder="dvoranaXX" required />
+                    <Input type="number" min="0" placeholder="Broj mjesta u dvorani" required onChange={(e) => setKapacitet(e.target.value)}></Input>
+                    <Select onChange={(e) => setOtvorena(e.target.value === "otvorena" ? true : false)} required>
+                        <Option value="otvorena">otvorena</Option>
+                        <Option value="zatvorena">zatvorena</Option>
+                    </Select>
+                    <Input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></Input>
 
-                    <button type="submit">Uredi dvoranu</button>
+                    <Button color="success" type="submit">
+                        Uredi dvoranu
+                    </Button>
                 </form>
             </div>
-            <button onClick={returnToDvorane}>Povratak</button>
+            <Button onClick={returnToDvorane}>Povratak</Button>
         </div>
     );
 }

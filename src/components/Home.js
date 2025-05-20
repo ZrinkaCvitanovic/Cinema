@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Select, Option, Input, Button, Table, Box, h2, FormLabel } from "@mui/joy";
+import { Select, Option, Input, Button, Table, Box, FormLabel } from "@mui/joy";
 
 import Navbar from "./Navbar";
 
 function Home() {
     const [projekcije, setProjekcije] = useState([]);
     const [imeDvorana, setImeDvorana] = useState("dvorana01");
-    const [idFilm, setIdFilm] = useState("");
-    const [unioProjekcija, setUnioProjekcija] = useState("admin1");
     const [trajanjeMin, setTrajanjeMin] = useState(0);
     const [datum, setDatum] = useState("");
     const [vrijemePoc, setVrijemePoc] = useState("");
@@ -19,7 +17,10 @@ function Home() {
     const [numFilms, setNumFilms] = useState(0);
     const [ids, setids] = useState([]);
     const [dvorane, setDvorane] = useState([]);
-    const [admini, setAdmini] = useState([]);
+    const [redatelji, setRedatelji] = useState([]);
+    const [idRedatelj, setIdRedatelj] = useState(1);
+    const [ime, setIme] = useState("");
+    const [prezime, setPrezime] = useState("");
 
     const navigate = useNavigate();
 
@@ -31,6 +32,14 @@ function Home() {
             .then((data) => {
                 data.map((d) => {
                     dvorane.push(d.ime);
+                });
+                console.log(dvorane);
+            });
+        fetch("http://localhost:8080/api/redatelj/all")
+            .then((response) => response.json())
+            .then((data) => {
+                data.map((d) => {
+                    redatelji.push(d.id);
                 });
                 console.log(dvorane);
             });
@@ -49,15 +58,6 @@ function Home() {
             .catch((err) => {
                 console.log(err);
             });
-        fetch("http://localhost:8080/api/admin/all")
-            .then((response) => response.json())
-            .then((data) => {
-                data.map((d) => {
-                    admini.push(d.korisnickoIme);
-                });
-                console.log(admini);
-                console.log(admini);
-            });
     }, [currentFilm]);
 
     const fetchProjekcijeByFilm = async (id) => {
@@ -65,6 +65,8 @@ function Home() {
             .then((response) => response.json())
             .then((data) => {
                 setFilmData(data);
+                setIme(data.redatelj.name);
+                setPrezime(data.redatelj.surname);
             })
             .catch((err) => {
                 console.log(err);
@@ -117,7 +119,7 @@ function Home() {
             slobodnaMjesta: parseInt(mjesta),
             datum: datum,
             vrijemePoc: vrijemePoc,
-            unioProjekcija: unioProjekcija,
+            idRedatelj: idRedatelj,
         };
 
         try {
@@ -127,7 +129,7 @@ function Home() {
                 body: JSON.stringify(payload),
             });
             if (!response.ok) {
-                throw new Error("Greška pri slanju podataka");
+                throw new Error("Greška pri slanju podataka - neočekivan odgovor poslužitelja");
             } else {
                 fetch(`http://localhost:8080/api/projekcija/film/${filmData.id}`)
                     .then((response) => response.json())
@@ -139,7 +141,7 @@ function Home() {
                     });
             }
         } catch (err) {
-            throw new Error("Greška pri slanju podataka22");
+            throw new Error("Greška pri slanju podataka - podatci nisu u ispravnom formatu");
         }
     };
 
@@ -165,6 +167,7 @@ function Home() {
                             <th>Trajanje (min)</th>
                             <th>Dobna granica</th>
                             <th>Cijena ulaznice(€)</th>
+                            <th>Redatelj</th>
                             <th colSpan={2}></th>
                         </tr>
                     </thead>
@@ -175,6 +178,9 @@ function Home() {
                             <td>{filmData.trajanjeMin}</td>
                             <td>{filmData.dobnaGranica}</td>
                             <td>{filmData.ulazEur}</td>
+                            <td>
+                                {ime} {prezime}{" "}
+                            </td>
                             <td>
                                 <Button color="success" size="sm" onClick={() => updateFilm()}>
                                     {" "}
@@ -200,7 +206,7 @@ function Home() {
                         <th>Datum</th>
                         <th>Vrijeme početka</th>
                         <th>Broj slobodnih mjesta</th>
-                        <th>Unio</th>
+                        <th>Redatelj</th>
                         <th colSpan="2"></th>
                     </tr>
                 </thead>
@@ -214,7 +220,6 @@ function Home() {
                                 <td>{p.datum}</td>
                                 <td>{p.vrijemePoc}</td>
                                 <td>{p.slobodnaMjesta == null ? 0 : p.slobodnaMjesta}</td>
-                                <td>{p.unioProjekcija}</td>
                                 <td>
                                     <Button color="success" size="sm" onClick={() => urediOneProjekcija(p.id)}>
                                         Uredi
@@ -250,8 +255,8 @@ function Home() {
                     <Input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></Input>
                     <Input type="text" required placeholder="hh:mm" onChange={(e) => setVrijemePoc(e.target.value)}></Input>
                     <Input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></Input>
-                    <Select placeholder="korisničko ime" onChange={(e) => setUnioProjekcija(e.target.value)}>
-                        {admini.map((a) => {
+                    <Select placeholder="ID redatelja" onChange={(e) => setIdRedatelj(e.target.value)}>
+                        {redatelji.map((a) => {
                             return <Option value={a}>{a}</Option>;
                         })}
                     </Select>
@@ -264,7 +269,7 @@ function Home() {
                     <Button
                         color="light"
                         onClick={() => {
-                            const previous = ids.indexOf(filmData.id) == 0 ? ids.length - 1 : ids.indexOf(filmData.id) - 1;
+                            const previous = ids.indexOf(filmData.id) === 0 ? ids.length - 1 : ids.indexOf(filmData.id) - 1;
                             fetchProjekcijeByFilm(ids[previous]);
                         }}
                     >

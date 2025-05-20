@@ -46,15 +46,14 @@ function UrediProjekciju() {
         };
         try {
             const response = await fetch("http://localhost:8080/api/projekcija", {
-                method: "POST",
+                method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
             });
             if (!response.ok) {
-                throw new Error("Greška pri slanju podataka");
+                throw new Error("Greška pri slanju podataka - neočekivan odgovor poslužitelja");
             } else {
                 navigate("/");
-                return;
                 fetch(`http://localhost:8080/api/projekcija/${id}`)
                     .then((response) => response.json())
                     .then((data) => {
@@ -66,7 +65,7 @@ function UrediProjekciju() {
                     });
             }
         } catch (err) {
-            throw new Error("Greška pri slanju podataka - nije se odradio fetch");
+            throw new Error("Greška pri slanju podataka - podatci nisu u ispravnom formatu");
         }
     };
 

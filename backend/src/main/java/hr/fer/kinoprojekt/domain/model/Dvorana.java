@@ -13,10 +13,7 @@ import java.util.Set;
 public class Dvorana {
     @Id
     private String ime;
-
-    @ManyToOne
-    @JoinColumn(name = "unioZaposlenik", referencedColumnName = "korisnickoIme")
-    private Zaposlenik zaposlenik;
+    
 
     private Integer kapacitet;
     private boolean otvorena;

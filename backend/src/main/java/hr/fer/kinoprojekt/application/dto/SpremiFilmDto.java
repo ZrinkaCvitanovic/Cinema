@@ -10,7 +10,7 @@ public class SpremiFilmDto {
     private Integer trajanjeMin;
     private Integer dobnaGranica;
     private Double ulazEur;
-    private String unioZaposlenik;
+    private Integer idRedatelj;
 
     public Film toDomain() {
         return Film.builder()

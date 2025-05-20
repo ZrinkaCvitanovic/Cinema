@@ -37,7 +37,7 @@ public class DvoranaController {
     @PostMapping(consumes = {"*/*"})
     public ResponseEntity<String> save(@RequestBody DvoranaDto dto) {
         try {
-            service.save(dto.toDomain(), dto.getUnioZaposlenik());
+            service.save(dto.toDomain());
             return ResponseEntity.ok("SUCCESS!");
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -18,6 +18,4 @@ public abstract class Zaposlenik {
     private String imeZaposlenika;
     private String prezimeZaposlenika;
 
-    @Enumerated(EnumType.STRING)
-    private Uloga uloga;
 }

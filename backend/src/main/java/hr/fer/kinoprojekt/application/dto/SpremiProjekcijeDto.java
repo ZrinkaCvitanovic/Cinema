@@ -11,7 +11,6 @@ import java.time.LocalTime;
 public class SpremiProjekcijeDto {
     private String id;
     private String imeDvorana;
-    private String unioProjekcija;
     private Integer idFilm;
     private Integer trajanjeMin;
     private String vrijemePoc;

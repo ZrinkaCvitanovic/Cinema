@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class ProjekcijaDto {
     private String id;
     private String imeDvorana;
-    private String unioProjekcija;
     private Integer idFilm;
     private Integer trajanjeMin;
     private String vrijemePoc;
@@ -24,7 +23,6 @@ public class ProjekcijaDto {
         return ProjekcijaDto.builder()
                 .id(projekcija.getId())
                 .imeDvorana(projekcija.getDvorana().getIme())
-                .unioProjekcija(projekcija.getUnioZaposlenik().getKorisnickoIme())
                 .idFilm(projekcija.getFilm().getId())
                 .trajanjeMin(projekcija.getTrajanjeMin())
                 .vrijemePoc(projekcija.getVrijemePoc().toString())

@@ -24,10 +24,6 @@ public class Projekcija {
     private Dvorana dvorana;
 
     @ManyToOne
-    @JoinColumn(name = "unioZaposlenik", referencedColumnName = "korisnickoIme")
-    private Zaposlenik unioZaposlenik;
-
-    @ManyToOne
     @JoinColumn(name = "idFilm", referencedColumnName = "id")
     private Film film;
 

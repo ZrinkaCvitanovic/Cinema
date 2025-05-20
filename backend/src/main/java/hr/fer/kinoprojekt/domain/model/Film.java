@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @Entity
 @Builder
@@ -17,12 +18,13 @@ public class Film {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "unioFilm", referencedColumnName = "korisnickoIme")
-    private Zaposlenik zaposlenik;
+    @JoinColumn(name = "redatelj", referencedColumnName = "id")
+    private Redatelj redatelj;
 
     @Column(unique = true)
     private String naziv;
     private Integer trajanjeMin;
     private Integer dobnaGranica;
     private Double ulazEur;
+
 }

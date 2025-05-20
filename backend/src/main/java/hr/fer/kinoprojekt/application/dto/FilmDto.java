@@ -1,6 +1,7 @@
 package hr.fer.kinoprojekt.application.dto;
 
 import hr.fer.kinoprojekt.domain.model.Film;
+import hr.fer.kinoprojekt.domain.model.Redatelj;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,7 +13,7 @@ public class FilmDto {
     private Integer trajanjeMin;
     private Integer dobnaGranica;
     private Double ulazEur;
-    private String unioZaposlenik;
+    private Redatelj redatelj;
 
     public static FilmDto fromDomain(Film domain) {
         return FilmDto.builder()
@@ -21,7 +22,7 @@ public class FilmDto {
                 .trajanjeMin(domain.getTrajanjeMin())
                 .dobnaGranica(domain.getDobnaGranica())
                 .ulazEur(domain.getUlazEur())
-                .unioZaposlenik(domain.getZaposlenik().getKorisnickoIme())
+                .redatelj(domain.getRedatelj())
                 .build();
     }
 }

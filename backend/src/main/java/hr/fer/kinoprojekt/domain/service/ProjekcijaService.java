@@ -4,7 +4,6 @@ import hr.fer.kinoprojekt.domain.model.Projekcija;
 import hr.fer.kinoprojekt.domain.repository.DvoranaRepository;
 import hr.fer.kinoprojekt.domain.repository.FilmRepository;
 import hr.fer.kinoprojekt.domain.repository.ProjekcijaRepository;
-import hr.fer.kinoprojekt.domain.repository.ZaposlenikRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,6 @@ public class ProjekcijaService {
 
     private ProjekcijaRepository projekcijaRepository;
     private DvoranaRepository dvoranaRepository;
-    private ZaposlenikRepository zaposlenikRepository;
     private FilmRepository filmRepository;
 
     public List<Projekcija> getProjekcije() {
@@ -27,12 +25,11 @@ public class ProjekcijaService {
         return projekcijaRepository.getProjekcija(id);
     }
 
-    public void save(Projekcija projekcija, String imeDvorana, String imeZaposlenik, Integer idFilm) {
+    public void save(Projekcija projekcija, String imeDvorana, Integer idFilm) {
         projekcija.setDvorana(dvoranaRepository.getDvorana(imeDvorana));
-        projekcija.setUnioZaposlenik(zaposlenikRepository.getPoKorisnickomImenu(imeZaposlenik));
         projekcija.setFilm(filmRepository.getFilm(idFilm));
-
         projekcijaRepository.save(projekcija);
+
     }
 
     public void delete(String id) {
@@ -47,7 +44,4 @@ public class ProjekcijaService {
         return projekcijaRepository.filterByFilm(ime);
     }
 
-    public List<Projekcija> filterByZaposlenik(String ime) {
-        return projekcijaRepository.filterByZaposlenik(ime);
-    }
 }

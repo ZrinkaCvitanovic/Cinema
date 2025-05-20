@@ -34,7 +34,7 @@ public class FilmController {
     @PostMapping(consumes = {"*/*"})
     public ResponseEntity<String> save(@RequestBody SpremiFilmDto dto) {
         try {
-            service.save(dto.toDomain(), dto.getUnioZaposlenik());
+            service.save(dto.toDomain(), dto.getIdRedatelj());
             return ResponseEntity.ok("SUCCESS!");
         } catch (Exception e) {
             System.out.println(e.getMessage());

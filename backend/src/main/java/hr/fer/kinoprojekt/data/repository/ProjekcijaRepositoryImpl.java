@@ -43,14 +43,10 @@ public class ProjekcijaRepositoryImpl implements ProjekcijaRepository {
         return repository.getProjekcijeByFilm_Id(id);
     }
 
-    public List<Projekcija> filterByZaposlenik(String ime) {
-        return repository.getProjekcijeByUnioZaposlenik_KorisnickoIme(ime);
-    }
 }
 
 @Repository
 interface JpaProjekcijaRepository extends JpaRepository<Projekcija, String> {
     List<Projekcija> getProjekcijeByDvorana_Ime(String dvoranaIme);
     List<Projekcija> getProjekcijeByFilm_Id(Integer filmId);
-    List<Projekcija> getProjekcijeByUnioZaposlenik_KorisnickoIme(String korisnickoIme);
 }

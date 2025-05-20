@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Table, Input, Select, Option, Button } from "@mui/joy";
+import { Table, Button } from "@mui/joy";
 
 import Navbar from "./Navbar";
 
@@ -109,13 +109,13 @@ function Dvorana() {
             </div>
             <div className="add-post-container">
                 <form onSubmit={handleSubmit}>
-                    <Input type="text" value={ime} placeholder="format: dvoranaXX" required onChange={(e) => setIme(e.target.value)} />
-                    <Input type="number" min="0" placeholder="Broj mjesta u dvorani" required onChange={(e) => setKapacitet(e.target.value)}></Input>
-                    <Select placeholder="otvorena/zatvorena" onChange={(e) => setOtvorena(e.target.value === "otvorena" ? true : false)} required>
-                        <Option>otvorena</Option>
-                        <Option>zatvorena</Option>
-                    </Select>
-                    <Input required type="text" placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></Input>
+                    <input type="text" value={ime} placeholder="format: dvoranaXX" required onChange={(e) => setIme(e.target.value)} />
+                    <input type="number" min="0" placeholder="Broj mjesta u dvorani" required onChange={(e) => setKapacitet(e.target.value)}></input>
+                    <select placeholder="otvorena/zatvorena" onChange={(e) => setOtvorena(e.target.value === "otvorena" ? true : false)} required>
+                        <option>otvorena</option>
+                        <option>zatvorena</option>
+                    </select>
+                    <input required type="text" placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></input>
 
                     <Button color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
                         Dodaj dvoranu

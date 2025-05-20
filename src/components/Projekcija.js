@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Select, Option, Input, Button, Table } from "@mui/joy";
+import { Button, Table } from "@mui/joy";
 
 import Navbar from "./Navbar";
 import Redatelj from "./Redatelj";
+import "../App.css";
 
 function Projekcija() {
     const [projekcije, setProjekcije] = useState([]);
@@ -107,12 +108,12 @@ function Projekcija() {
         <div className="App">
             <Navbar />
             <form onSubmit={handleSearch}>
-                <Select onChange={(e) => setCriteria(e.target.value)} placeholder="Odaberite kriterij iz padajućeg izbornika">
-                    <Option value="id">ID projekcije (default)</Option>
-                    <Option value="dvorana">Dvorana</Option>
-                    <Option value="film">Film</Option>
-                </Select>
-                <Input type="text" onChange={(e) => setValue(e.target.value)}></Input>
+                <select onChange={(e) => setCriteria(e.target.value)} placeholder="Odaberite kriterij iz padajućeg izbornika">
+                    <option value="id">ID projekcije (default)</option>
+                    <option value="dvorana">Dvorana</option>
+                    <option value="film">Film</option>
+                </select>
+                <input type="text" onChange={(e) => setValue(e.target.value)}></input>
                 <Button variant="soft" type="submit">
                     Pretraži
                 </Button>
@@ -127,6 +128,7 @@ function Projekcija() {
                         <th>Vrijeme početka</th>
                         <th>Trajanje (min)</th>
                         <th>Broj slobodnih mjesta</th>
+                        <th colSpan={2}></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,12 +160,12 @@ function Projekcija() {
             </Table>
             <div style={{ marginTop: 40 + "px" }}>
                 <form onSubmit={handleSubmit}>
-                    <Input type="text" required placeholder="dvoranaXX" onChange={(e) => setImeDvorana(e.target.value)} />
-                    <Input type="number" required placeholder="ID filma" onChange={(e) => setIdFilm(e.target.value)}></Input>
-                    <Input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></Input>
-                    <Input type="text" required placeholder="hh:mm" onChange={(e) => setVrijemePoc(e.target.value)}></Input>
-                    <Input type="number" required placeholder="Trajanje" onChange={(e) => setTrajanjeMin(e.target.value)}></Input>
-                    <Input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></Input>
+                    <input type="text" required placeholder="dvoranaXX" onChange={(e) => setImeDvorana(e.target.value)} />
+                    <input type="number" required placeholder="ID filma" onChange={(e) => setIdFilm(e.target.value)}></input>
+                    <input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></input>
+                    <input type="text" required placeholder="hh:mm" onChange={(e) => setVrijemePoc(e.target.value)}></input>
+                    <input type="number" required placeholder="Trajanje" onChange={(e) => setTrajanjeMin(e.target.value)}></input>
+                    <input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></input>
                     <Button size="sm" color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
                         Dodaj projekciju
                     </Button>

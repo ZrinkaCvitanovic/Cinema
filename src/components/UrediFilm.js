@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { Button, Input, Table, Select, Option } from "@mui/joy";
+import { Button, Table } from "@mui/joy";
 
 import Navbar from "./Navbar";
 import "../App.css";
@@ -113,15 +113,15 @@ function UrediFilm() {
             </Table>
             <div className="add-post-container">
                 <form onSubmit={handleSubmit}>
-                    <Input type="text" placeholder="naziv" onClick={(e) => setNaziv(e.target.value)}></Input>
-                    <Input type="number" placeholder="trajanje u min" onChange={(e) => setTrajanje(e.target.value)}></Input>
-                    <Input type="number" placeholder="cijena u eurima (xx.xx)" step="0.01" onChange={(e) => setCijena(e.target.value)}></Input>
-                    <Input type="number" placeholder="dobna granica" onChange={(e) => setDob(e.target.value)}></Input>
-                    <Select placeholder="ID redatelja" onChange={(e) => setIdRedatelj(e.target.value)}>
+                    <input type="text" placeholder="naziv" onClick={(e) => setNaziv(e.target.value)}></input>
+                    <input type="number" placeholder="trajanje u min" onChange={(e) => setTrajanje(e.target.value)}></input>
+                    <input type="number" placeholder="cijena u eurima (xx.xx)" step="0.01" onChange={(e) => setCijena(e.target.value)}></input>
+                    <input type="number" placeholder="dobna granica" onChange={(e) => setDob(e.target.value)}></input>
+                    <select placeholder="ID redatelja" onChange={(e) => setIdRedatelj(e.target.value)}>
                         {redatelji.map((a) => {
-                            return <Option value={a}>{a}</Option>;
+                            return <option value={a}>{a}</option>;
                         })}
-                    </Select>
+                    </select>
                     <Button type="submit" color="success">
                         Uredi film
                     </Button>

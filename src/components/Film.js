@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Table, Input, Button } from "@mui/joy";
+import { Table, Button } from "@mui/joy";
 
 import Navbar from "./Navbar";
 
@@ -108,11 +108,11 @@ function Film() {
             </Table>
             <div style={{ marginTop: 70 + "px" }}>
                 <form onSubmit={handleSubmit}>
-                    <Input type="text" required value={naziv} placeholder="Naziv filma" onChange={(e) => setNaziv(e.target.value)} />
-                    <Input type="number" required placeholder="Trajanje u minutama" onChange={(e) => setTrajanje(e.target.value)}></Input>
-                    <Input type="number" required min="0" max="20" step="0.01" placeholder="xx.xx" onChange={(e) => setCijena(e.target.value)}></Input>
-                    <Input type="number" required placeholder="Dobno ogrančenje" onChange={(e) => setDob(e.target.value)}></Input>
-                    <Input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></Input>
+                    <input type="text" required value={naziv} placeholder="Naziv filma" onChange={(e) => setNaziv(e.target.value)} />
+                    <input type="number" required placeholder="Trajanje u minutama" onChange={(e) => setTrajanje(e.target.value)}></input>
+                    <input type="number" required min="0" max="20" step="0.01" placeholder="xx.xx" onChange={(e) => setCijena(e.target.value)}></input>
+                    <input type="number" required placeholder="Dobno ogrančenje" onChange={(e) => setDob(e.target.value)}></input>
+                    <input type="text" required placeholder="Korisničko ime zaposlenika" onChange={(e) => setZaposl(e.target.value)}></input>
                     <Button color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
                         Dodaj film
                     </Button>

@@ -1,38 +1,81 @@
-.App {
-    text-align: center;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Base Reset */
+button,
+input,
+select {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
+/* Button */
+button {
+    background-color: #1976d2;
     color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
 }
 
-.App-link {
-    color: #61dafb;
+button:hover {
+    background-color: #1565c0;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+button:active {
+    background-color: #0d47a1;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: #333;
+    width: 50%;
+    max-width: 250px;
+}
+
+input:focus,
+select:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+/* Select */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill%3D'%23333'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%20width%3D'24'%20xmlns%3D'http://www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M7%2010l5%205%205-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1rem;
+    padding-right: 2rem;
+}
+
+/* Option */
+option {
+    padding: 0.5rem;
+    background-color: white;
+    color: #333;
+}
+
+/* Disabled State */
+button:disabled,
+input:disabled,
+select:disabled {
+    background-color: #e0e0e0;
+    color: #888;
+    cursor: not-allowed;
 }

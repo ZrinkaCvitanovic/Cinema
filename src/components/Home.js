@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Select, Option, Input, Button, Table, Box, FormLabel } from "@mui/joy";
+import { Button, Table, Box, FormLabel } from "@mui/joy";
 
 import Navbar from "./Navbar";
 
@@ -246,45 +246,41 @@ function Home() {
                 }}
             >
                 <form onSubmit={handleSubmit}>
-                    <Select placeholder="dvorana" onChange={(e) => setImeDvorana(e.target.value)}>
+                    <select placeholder="dvorana" onChange={(e) => setImeDvorana(e.target.value)}>
                         {dvorane.map((d) => {
-                            return <Option value={d}>{d}</Option>;
+                            return <option value={d}>{d}</option>;
                         })}
-                    </Select>
-                    <Input type="number" value={filmData.id} readOnly></Input>
-                    <Input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></Input>
-                    <Input type="text" required placeholder="hh:mm" onChange={(e) => setVrijemePoc(e.target.value)}></Input>
-                    <Input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></Input>
-                    <Select placeholder="ID redatelja" onChange={(e) => setIdRedatelj(e.target.value)}>
+                    </select>
+                    <input type="number" value={filmData.id} readOnly></input>
+                    <input type="text" required placeholder="yyyy-mm-dd" onChange={(e) => setDatum(e.target.value)}></input>
+                    <input type="text" required placeholder="hh:mm" onChange={(e) => setVrijemePoc(e.target.value)}></input>
+                    <input type="number" required min="0" placeholder="Slobodna mjesta" onChange={(e) => setMjesta(e.target.value)}></input>
+                    <select placeholder="ID redatelja" onChange={(e) => setIdRedatelj(e.target.value)}>
                         {redatelji.map((a) => {
-                            return <Option value={a}>{a}</Option>;
+                            return <option value={a}>{a}</option>;
                         })}
-                    </Select>
+                    </select>
                     <FormLabel> </FormLabel>
                     <Button color="warning" type="submit" style={{ marginTop: 20 + "px" }}>
                         Unesi projekciju
                     </Button>
                 </form>
-                <div>
-                    <Button
-                        color="light"
-                        onClick={() => {
-                            const previous = ids.indexOf(filmData.id) === 0 ? ids.length - 1 : ids.indexOf(filmData.id) - 1;
-                            fetchProjekcijeByFilm(ids[previous]);
-                        }}
-                    >
-                        Prethodni
-                    </Button>
-                    <Button
-                        color="light"
-                        onClick={() => {
-                            const next = (ids.indexOf(filmData.id) + 1) % ids.length;
-                            fetchProjekcijeByFilm(ids[next]);
-                        }}
-                    >
-                        Sljedeći
-                    </Button>
-                </div>
+                <Button
+                    onClick={() => {
+                        const previous = ids.indexOf(filmData.id) === 0 ? ids.length - 1 : ids.indexOf(filmData.id) - 1;
+                        fetchProjekcijeByFilm(ids[previous]);
+                    }}
+                >
+                    Prethodni
+                </Button>
+                <Button
+                    onClick={() => {
+                        const next = (ids.indexOf(filmData.id) + 1) % ids.length;
+                        fetchProjekcijeByFilm(ids[next]);
+                    }}
+                >
+                    Sljedeći
+                </Button>
             </Box>
         </div>
     );

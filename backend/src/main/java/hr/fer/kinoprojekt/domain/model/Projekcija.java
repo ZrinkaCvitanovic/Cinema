@@ -24,7 +24,7 @@ public class Projekcija {
     private Dvorana dvorana;
 
     @ManyToOne
-    @JoinColumn(name = "idFilm", referencedColumnName = "id")
+    @JoinColumn(name = "idFilm", foreignKey = @ForeignKey(name = "fk_film_proj"))
     private Film film;
 
     private Integer trajanjeMin = 0;

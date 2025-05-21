@@ -92,6 +92,7 @@ function Home() {
                 return p.id !== id;
             })
         );
+
         return;
     };
 
@@ -102,6 +103,13 @@ function Home() {
                 return film.id !== id;
             })
         );
+        let remainedIds = ids.filter((i) => i !== id);
+        setids(remainedIds);
+        console.log(ids);
+        const next = (ids.indexOf(filmData.id) + 1) % ids.length;
+        console.log(next);
+        console.log(ids[next]);
+        fetchProjekcijeByFilm(ids[next]);
         return;
     };
 
@@ -141,7 +149,7 @@ function Home() {
                     });
             }
         } catch (err) {
-            throw new Error("Greška pri slanju podataka - podatci nisu u ispravnom formatu");
+            throw new Error("Greška pri slanju podataka - podatci nisu u ispravnom formatu. Moguća preklapanja filma i vremena projekcije.");
         }
     };
 
@@ -206,7 +214,6 @@ function Home() {
                         <th>Datum</th>
                         <th>Vrijeme početka</th>
                         <th>Broj slobodnih mjesta</th>
-                        <th>Redatelj</th>
                         <th colSpan="2"></th>
                     </tr>
                 </thead>

@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 @AllArgsConstructor
@@ -42,6 +44,8 @@ public class ProjekcijaRepositoryImpl implements ProjekcijaRepository {
     public List<Projekcija> filterByFilm(Integer id) {
         return repository.getProjekcijeByFilm_Id(id);
     }
+
+
 
 }
 

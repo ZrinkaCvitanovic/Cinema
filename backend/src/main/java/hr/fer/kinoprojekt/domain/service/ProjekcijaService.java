@@ -1,5 +1,7 @@
 package hr.fer.kinoprojekt.domain.service;
 
+import hr.fer.kinoprojekt.application.dto.ProjekcijaDto;
+import hr.fer.kinoprojekt.application.dto.SpremiProjekcijeDto;
 import hr.fer.kinoprojekt.domain.model.Projekcija;
 import hr.fer.kinoprojekt.domain.model.TipProjekcije;
 import hr.fer.kinoprojekt.domain.repository.DvoranaRepository;
@@ -9,6 +11,7 @@ import hr.fer.kinoprojekt.domain.repository.TipProjekcijeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -46,6 +49,20 @@ public class ProjekcijaService {
 
     public List<Projekcija> filterByFilm (Integer ime) {
         return projekcijaRepository.filterByFilm(ime);
+    }
+
+    public boolean checkAvailability(SpremiProjekcijeDto projekcija) {
+        String datum = projekcija.getDatum();
+        String vrijeme = projekcija.getVrijemePoc();
+        List<Projekcija> filteredByFilm = projekcijaRepository.filterByFilm(projekcija.getIdFilm());
+        List<Projekcija> filteredByDatum = filteredByFilm.stream().filter((p -> p.getDatum().toString().equals(datum) )).toList();
+        List<String> vremena = filteredByDatum.stream().map(p -> p.getVrijemePoc().toString()).toList();
+        return (!vremena.contains(vrijeme));
+
+        //dohvatiti sve projekcije filma preko filterByFilm
+        //spremiti sva vremena u temp varijablu
+        //ako trenutno vrijeme nije u tome, prihvaćam
+        //inače odbijem i objasnim error
     }
 
 }

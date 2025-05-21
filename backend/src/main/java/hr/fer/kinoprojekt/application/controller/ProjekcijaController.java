@@ -46,6 +46,10 @@ public class ProjekcijaController {
     @PostMapping()
     public ResponseEntity<String> create(@RequestBody SpremiProjekcijeDto projekcijaDto) {
         try {
+            boolean legit = projekcijaService.checkAvailability(projekcijaDto);
+            if (!legit) {
+                return ResponseEntity.badRequest().body("Postoji vremensko preklapanje za ovaj film, odaberite novo vrijeme");
+            }
             projekcijaService.save(projekcijaDto.toDomain(), projekcijaDto.getImeDvorana(), projekcijaDto.getIdFilm(), projekcijaDto.getIdTip());
             return ResponseEntity.ok("Success");
         } catch (Exception e) {

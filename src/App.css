@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/* Base Reset */
 button,
 input,
 select {
@@ -16,7 +15,6 @@ select {
     transition: all 0.2s ease;
 }
 
-/* Button */
 button {
     background-color: #1976d2;
     color: white;
@@ -54,7 +52,6 @@ select:focus {
     box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
 }
 
-/* Select */
 select {
     appearance: none;
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill%3D'%23333'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%20width%3D'24'%20xmlns%3D'http://www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M7%2010l5%205%205-5z'/%3E%3C/svg%3E");
@@ -64,14 +61,12 @@ select {
     padding-right: 2rem;
 }
 
-/* Option */
 option {
     padding: 0.5rem;
     background-color: white;
     color: #333;
 }
 
-/* Disabled State */
 button:disabled,
 input:disabled,
 select:disabled {

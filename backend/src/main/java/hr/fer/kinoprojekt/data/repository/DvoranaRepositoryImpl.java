@@ -2,6 +2,8 @@ package hr.fer.kinoprojekt.data.repository;
 
 import hr.fer.kinoprojekt.domain.model.Dvorana;
 import hr.fer.kinoprojekt.domain.repository.DvoranaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -40,6 +42,8 @@ public class DvoranaRepositoryImpl implements DvoranaRepository {
         repository.save(dvorana);
     }
 
+    @Modifying
+    @Transactional
     @Override
     public void deletePoNazivu(String ime) {
         repository.deleteByIme(ime);

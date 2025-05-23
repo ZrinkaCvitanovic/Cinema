@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.util.Set;
 
-@Data // @ToString, @EqualsAndHashCode, @Getter, @Setter and @RequiredArgsConstructor
+@Data // obuhvaca @ToString, @EqualsAndHashCode, @Getter, @Setter and @RequiredArgsConstructor
 @Entity
 @Builder
 @NoArgsConstructor

@@ -23,7 +23,6 @@ class DvoranaServiceTest {
 
     @Test
     void testGetDvorane_ReturnsList() {
-        // Arrange
         List<Dvorana> expectedList = Arrays.asList(
                 Dvorana.builder()
                         .ime("Dvorana A")
@@ -41,17 +40,14 @@ class DvoranaServiceTest {
 
         when(dvoranaRepository.getDvorane()).thenReturn(expectedList);
 
-        // Act
         List<Dvorana> actualList = dvoranaService.getDvorane();
 
-        // Assert
         assertEquals(expectedList, actualList);
         verify(dvoranaRepository, times(1)).getDvorane();
     }
 
     @Test
     void testGetDvorana_ReturnsCorrectDvorana() {
-        // Arrange
         Dvorana expected = Dvorana.builder()
                 .ime("Dvorana A")
                 .kapacitet(150)
@@ -61,17 +57,14 @@ class DvoranaServiceTest {
 
         when(dvoranaRepository.getDvorana("Dvorana A")).thenReturn(expected);
 
-        // Act
         Dvorana actual = dvoranaService.getDvorana("Dvorana A");
 
-        // Assert
         assertEquals(expected, actual);
         verify(dvoranaRepository, times(1)).getDvorana("Dvorana A");
     }
 
     @Test
     void testSave_CallsRepositorySave() {
-        // Arrange
         Dvorana dvorana = Dvorana.builder()
                 .ime("Dvorana A")
                 .kapacitet(120)
@@ -79,22 +72,17 @@ class DvoranaServiceTest {
                 .projekcije(new HashSet<>())
                 .build();
 
-        // Act
         dvoranaService.save(dvorana);
 
-        // Assert
         verify(dvoranaRepository, times(1)).save(dvorana);
     }
 
     @Test
     void testDelete_CallsRepositoryDeletePoNazivu() {
-        // Arrange
         String ime = "Dvorana A";
 
-        // Act
         dvoranaService.delete(ime);
 
-        // Assert
         verify(dvoranaRepository, times(1)).deletePoNazivu(ime);
     }
 }

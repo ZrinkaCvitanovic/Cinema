@@ -12,9 +12,9 @@ public class NoSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .securityMatchers(matchers -> matchers.anyRequest()) // Match all requests
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // Allow all
-                .csrf(csrf -> csrf.disable()); // Disable CSRF
+                .securityMatchers(matchers -> matchers.anyRequest()) 
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) 
+                .csrf(csrf -> csrf.disable());
         return http.build();
     }
 }
